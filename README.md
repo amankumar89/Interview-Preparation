@@ -1,530 +1,316 @@
-# 📋 Complete Interview Preparation Roadmap
-Your resume shows **2+ years of production experience** with **Java + Spring Boot + React** stack. You're strongest in **enterprise full-stack roles**. Below is a **comprehensive, prioritized list** of every topic you need to prepare—from **must-know** (based on your actual work) to **gap-fillers** (to level up).
-
----
-
-## 🔴 **LEVEL 1: MUST-REVISE (CORE TO YOUR RESUME)**
-*Expect deep-dive questions. These are topics you've actually used in production.*
-
----
-
-### **A. FRONTEND (React + TypeScript)**
-
-#### **React Fundamentals**
-- [ ] JSX, Components (Class vs Functional)
-- [ ] Props vs State
-- [ ] Lifecycle methods vs `useEffect`
-- [ ] Controlled vs Uncontrolled components
-- [ ] Lists & Keys
-- [ ] Event Handling & Synthetic Events
-- [ ] Conditional Rendering
-- [ ] Fragments & Portals
-
-#### **React Hooks (Deep Dive)**
-- [ ] `useState` (lazy initialization, functional updates)
-- [ ] `useEffect` (dependency array, cleanup, multiple effects)
-- [ ] `useContext` (when to use, performance implications)
-- [ ] `useReducer` (vs useState)
-- [ ] `useCallback` (when to memoize functions)
-- [ ] `useMemo` (vs useCallback, when to use)
-- [ ] `useRef` (DOM refs, mutable values)
-- [ ] `useLayoutEffect` (vs useEffect)
-- [ ] `useImperativeHandle` (forwardRef)
-- [ ] Custom Hooks (building reusable logic)
-
-#### **State Management**
-- [ ] **Redux Toolkit** (your primary tool)
-  - `configureStore`
-  - `createSlice` (reducers, actions)
-  - `createAsyncThunk` (async actions)
-  - `createSelector` (reselect memoization)
-  - RTK Query (if used)
-- [ ] **Zustand** (comparison with Redux)
-  - Store creation
-  - Selectors
-  - Middleware (persist, devtools)
-- [ ] **Context API** (vs Redux/Zustand)
-- [ ] State persistence (localStorage, sessionStorage)
-
-#### **Routing**
-- [ ] React Router v6
-  - `BrowserRouter`, `Routes`, `Route`
-  - `Link`, `NavLink`, `useNavigate`
-  - `useParams`, `useLocation`
-  - Nested Routes & Outlet
-  - Protected Routes (Auth guards)
-  - Loader functions & `useLoaderData`
-- [ ] Query Parameters (`useSearchParams`)
-
-#### **Data Fetching**
-- [ ] **TanStack Query (React Query)**
-  - `useQuery` (staleTime, cacheTime, refetch)
-  - `useMutation` (onSuccess, onError, invalidateQueries)
-  - Query Keys & Query Client
-  - Pagination & Infinite Queries
-  - Optimistic Updates
-- [ ] **Axios** (your tool)
-  - Interceptors (request/response)
-  - Cancellation tokens
-  - Global error handling
-- [ ] Fetch API (vs Axios)
-
-#### **Performance Optimization**
-- [ ] Code Splitting (React.lazy, Suspense)
-- [ ] Lazy Loading (images, components)
-- [ ] Memoization (`React.memo`, `useMemo`, `useCallback`)
-- [ ] Virtualization (react-window, react-virtualized)
-- [ ] Bundle Size Optimization (Tree shaking, chunking)
-- [ ] Debouncing & Throttling
-- [ ] Lighthouse Audit & Core Web Vitals
-
-#### **UI Libraries (Your Stack)**
-- [ ] **Tailwind CSS**
-  - Utility classes
-  - Responsive design (`sm:`, `md:`, `lg:`)
-  - Dark mode
-  - Custom themes (`tailwind.config.js`)
-  - @apply directive
-- [ ] **Ant Design**
-  - Components (Table, Form, Modal, Menu)
-  - Custom themes (ConfigProvider)
-  - Table pagination & filters
-- [ ] **Shadcn UI** (if used)
-
-#### **TypeScript (Frontend)**
-- [ ] Basic types (`string`, `number`, `boolean`, `any`, `unknown`)
-- [ ] Interfaces vs Types
-- [ ] Union & Intersection types
-- [ ] Generics (`<T>`)
-- [ ] Utility Types (`Pick`, `Omit`, `Partial`, `Required`, `Readonly`, `Record`)
-- [ ] Type narrowing (typeof, instanceof, type guards)
-- [ ] `keyof`, `typeof` operators
-- [ ] React TypeScript patterns (Props, State, Events, Refs)
-
-#### **Forms & Validation**
-- [ ] React Hook Form (or Formik)
-- [ ] Validation libraries (Yup, Zod)
-- [ ] Dynamic Forms
-- [ ] File Uploads (multipart/form-data)
-- [ ] Reusable Form Components
-
----
-
-### **B. BACKEND (Java + Spring Boot)**
-
-#### **Java Core**
-- [ ] OOP Concepts (Inheritance, Polymorphism, Encapsulation, Abstraction)
-- [ ] Collections Framework (List, Set, Map - HashMap, ConcurrentHashMap)
-- [ ] Streams API (map, filter, reduce, collect)
-- [ ] Optional (vs null checks)
-- [ ] Exception Handling (Checked vs Unchecked, try-catch-finally, custom exceptions)
-- [ ] Multi-threading (Thread, Runnable, ExecutorService)
-- [ ] Synchronization & Volatile
-- [ ] Functional Interfaces (Predicate, Consumer, Supplier, Function)
-- [ ] Lambda Expressions
-- [ ] Method References
-- [ ] Java I/O (File handling, BufferedReader)
-
-#### **Spring Framework Core**
-- [ ] **IoC & DI** (Inversion of Control, Dependency Injection)
-  - Constructor Injection vs Setter Injection
-  - @Autowired, @Qualifier, @Primary
-- [ ] **Spring Beans**
-  - Bean Scopes (Singleton, Prototype, Request, Session)
-  - Bean Lifecycle (@PostConstruct, @PreDestroy)
-  - @Component, @Service, @Repository, @Controller
-- [ ] **Configuration**
-  - @Configuration, @Bean
-  - ApplicationContext, BeanFactory
-  - Properties (application.yml, @Value, @ConfigurationProperties)
-
-#### **Spring MVC (Web Layer)**
-- [ ] @RestController vs @Controller
-- [ ] @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
-- [ ] @RequestParam, @PathVariable, @RequestBody
-- [ ] @RequestHeader, @CookieValue
-- [ ] ResponseEntity (custom status codes)
-- [ ] Exception Handling
-  - @ExceptionHandler
-  - @ControllerAdvice (Global exception handling)
-  - @ResponseStatus
-- [ ] Validation
-  - @Valid, @Validated
-  - Validation annotations (@NotNull, @Size, @Email, @Pattern)
-  - Custom Validators
-- [ ] DTOs & Mappers (ModelMapper, MapStruct)
-
-#### **Spring Data JPA / Hibernate**
-- [ ] **ORM Concepts**
-  - Entity mapping (@Entity, @Table)
-  - @Id, @GeneratedValue (GenerationType)
-- [ ] **Relationships**
-  - @OneToOne, @OneToMany, @ManyToOne, @ManyToMany
-  - Fetch Types (EAGER vs LAZY)
-  - Cascade Types
-- [ ] **JPA Repository**
-  - JpaRepository, CrudRepository, PagingAndSortingRepository
-  - Query Methods (findBy, existsBy, countBy)
-  - @Query (JPQL, Native Query)
-  - Pagination (Pageable, Page)
-  - Sorting
-- [ ] **Entity Lifecycle**
-  - @PrePersist, @PreUpdate, @PreRemove
-  - @PostLoad
-- [ ] **Persistence Context**
-  - Detached, Managed, Transient states
-  - Dirty Checking
-- [ ] **N+1 Query Problem** (Solution: @EntityGraph, Fetch Join)
-- [ ] **LazyInitializationException** (Solution: Open Session In View)
-- [ ] **Optimistic Locking** (@Version)
-
-#### **Security (Spring Security + JWT)**
-- [ ] **Authentication Flow**
-  - UserDetailsService
-  - AuthenticationManager, AuthenticationProvider
-  - PasswordEncoder (BCrypt)
-- [ ] **JWT Implementation** (Your exact work)
-  - Access Token (5 min) + Refresh Token (24 hr)
-  - Token generation (JJWT library)
-  - Token validation
-  - JWT Filter (OncePerRequestFilter)
-- [ ] **Authorization (RBAC)**
-  - @PreAuthorize, @PostAuthorize
-  - hasRole(), hasAuthority()
-  - AntMatchers / RequestMatchers
-  - Method-level security
-- [ ] **Security Configuration**
-  - SecurityFilterChain
-  - CORS configuration
-  - CSRF disable (for stateless APIs)
-  - Session Management (STATELESS)
-- [ ] **HTTP-only Cookies** (for refresh tokens)
-- [ ] **AuthenticationEntryPoint** (unauthorized handling)
-- [ ] **AccessDeniedHandler** (forbidden handling)
-
-#### **RESTful APIs**
-- [ ] REST Principles (Stateless, Resource-based, HTTP verbs)
-- [ ] Status Codes (200, 201, 400, 401, 403, 404, 500)
-- [ ] API Versioning (URL, Header, Query param)
-- [ ] HATEOAS (optional)
-- [ ] Pagination & Filtering
-- [ ] Sorting (ASC/DESC)
-- [ ] Soft Delete (flag: is_deleted)
-
-#### **Scheduling (Your Work)**
-- [ ] @Scheduled (fixedDelay, fixedRate, cron)
-- [ ] Cron expressions (0 0 * * * ?)
-- [ ] Async scheduling (@EnableAsync, @Async)
-- [ ] Duplicate prevention (Database flags, locks)
-
-#### **Logging & Monitoring**
-- [ ] SLF4J + Logback/Log4j2
-- [ ] Log levels (TRACE, DEBUG, INFO, WARN, ERROR)
-- [ ] Structured logging (JSON)
-- [ ] Actuator endpoints (/actuator/health, /actuator/metrics)
-
-#### **Testing (Critical Gap to Fill)**
-- [ ] JUnit 5 (Jupiter)
-  - @Test, @BeforeEach, @AfterEach
-  - Assertions (assertEquals, assertThrows)
-- [ ] Mockito
-  - @Mock, @InjectMocks
-  - when(), verify()
-  - ArgumentCaptor
-- [ ] Spring Boot Test
-  - @SpringBootTest
-  - @WebMvcTest (controllers)
-  - @DataJpaTest (repositories)
-  - @TestConfiguration
-- [ ] Testcontainers (for integration tests)
-- [ ] Postman/Newman (API testing)
-
----
-
-### **C. DATABASE**
-
-#### **PostgreSQL**
-- [ ] SQL Basics (SELECT, INSERT, UPDATE, DELETE)
-- [ ] Joins (INNER, LEFT, RIGHT, FULL OUTER, CROSS)
-- [ ] Subqueries & CTEs (WITH clause)
-- [ ] Aggregate Functions (COUNT, SUM, AVG, MAX, MIN)
-- [ ] GROUP BY, HAVING
-- [ ] Window Functions (ROW_NUMBER, RANK, DENSE_RANK)
-- [ ] Indexes (B-tree, Hash, GIN, GiST)
-- [ ] Transactions (ACID, BEGIN, COMMIT, ROLLBACK)
-- [ ] Isolation Levels (Read Committed, Repeatable Read, Serializable)
-- [ ] Foreign Keys (ON DELETE CASCADE)
-- [ ] Constraints (NOT NULL, UNIQUE, CHECK)
-- [ ] JSON/JSONB data types (PostgreSQL specific)
-- [ ] Query Optimization (EXPLAIN, ANALYZE)
-
-#### **JPA/Hibernate Optimizations**
-- [ ] N+1 Query Problem & Solutions
-- [ ] Batch Fetching (@BatchSize)
-- [ ] Second-Level Cache (Ehcache, Redis)
-- [ ] Query Cache
-- [ ] Lazy vs Eager Loading strategies
-
----
-
-### **D. TOOLS & VERSION CONTROL**
-
-#### **Git**
-- [ ] Basic commands (clone, add, commit, push, pull)
-- [ ] Branching strategies (Git Flow, GitHub Flow)
-- [ ] Merge vs Rebase
-- [ ] Resolving conflicts
-- [ ] Stashing (git stash)
-- [ ] Cherry-pick
-- [ ] Reset vs Revert
-- [ ] Tagging (releases)
-
-#### **Postman**
-- [ ] Creating collections
-- [ ] Environment variables
-- [ ] Pre-request scripts
-- [ ] Tests (pm.test, pm.expect)
-- [ ] Newman (CLI runner)
-
-#### **JIRA**
-- [ ] User Stories, Tasks, Bugs
-- [ ] Epics & Sprints
-- [ ] Kanban vs Scrum boards
-
----
-
-## 🟡 **LEVEL 2: GOOD-TO-HAVE (LISTED BUT NOT DEEP)**
-
-*Topics from your "Skills" section that you've mentioned but may not have used extensively in production.*
-
----
-
-### **A. NEXT.JS**
-- [ ] SSR (Server-Side Rendering) vs SSG (Static Site Generation)
-- [ ] getServerSideProps, getStaticProps, getStaticPaths
-- [ ] API Routes
-- [ ] App Router vs Pages Router
-- [ ] File-based Routing
-- [ ] Middleware
-- [ ] Image Optimization (next/image)
-- [ ] ISR (Incremental Static Regeneration)
-
-### **B. NODE.JS + EXPRESS (MERN)**
-- [ ] Event Loop & Async/Await
-- [ ] Express middleware (custom, third-party)
-- [ ] Error handling middleware
-- [ ] Routing (express.Router)
-- [ ] Static file serving
-- [ ] Environment variables (dotenv)
-- [ ] CORS (cors package)
-- [ ] Body parsing (express.json, express.urlencoded)
-
-### **C. DRIZZLE ORM (from projects)**
-- [ ] Schema definition
-- [ ] Queries (select, insert, update, delete)
-- [ ] Relations (one-to-many, many-to-many)
-- [ ] Migrations
-- [ ] Transactions
-
-### **D. REDIS (Listed in skills)**
-- [ ] Caching patterns (Cache-Aside, Write-Through)
-- [ ] TTL (Time To Live)
-- [ ] Spring Cache + Redis (@Cacheable, @CacheEvict, @CachePut)
-- [ ] Redis Data Types (String, List, Set, Hash, Sorted Set)
-- [ ] Pub/Sub
-
-### **E. DOCKER (Listed in skills)**
-- [ ] Dockerfile (FROM, RUN, COPY, EXPOSE, CMD)
-- [ ] docker-compose.yml (multi-container apps)
-- [ ] Image vs Container
-- [ ] Volumes (persistence)
-- [ ] Networks
-- [ ] Docker Hub (push/pull)
-
-### **F. AWS (Listed in skills)**
-- [ ] EC2 (Virtual Machines)
-- [ ] S3 (Object Storage)
-- [ ] RDS (Managed Databases)
-- [ ] IAM (Roles, Policies)
-- [ ] Lambda (Serverless)
-- [ ] API Gateway
-- [ ] Cognito (Authentication)
-- [ ] CloudWatch (Monitoring)
-
----
-
-## 🟢 **LEVEL 3: GAP-FILLERS (NOT ON RESUME BUT EXPECTED)**
-
-*Topics you should learn to level up for senior roles or to fill blind spots.*
-
----
-
-### **A. SYSTEM DESIGN (Crucial for Senior Roles)**
-- [ ] Load Balancing (Round Robin, Least Connections, Consistent Hashing)
-- [ ] Caching (CDN, Redis, Memcached)
-- [ ] Database Sharding (Horizontal Partitioning)
-- [ ] Database Replication (Master-Slave, Master-Master)
-- [ ] CAP Theorem (Consistency, Availability, Partition Tolerance)
-- [ ] Microservices vs Monolith
-- [ ] API Gateway (Spring Cloud Gateway, Kong, AWS API Gateway)
-- [ ] Service Discovery (Eureka, Consul)
-- [ ] Distributed Tracing (Zipkin, Jaeger)
-- [ ] Circuit Breaker (Resilience4j, Hystrix)
-- [ ] Message Queues (RabbitMQ, Kafka, SQS)
-- [ ] Event-Driven Architecture
-- [ ] Rate Limiting (Token Bucket, Leaky Bucket)
-- [ ] WebSockets (Real-time communication)
-
-### **B. MICROSERVICES (Skill mentioned but no exp)**
-- [ ] Spring Cloud Netflix (Eureka, Zuul, Hystrix)
-- [ ] Spring Cloud Gateway
-- [ ] Feign Client (Declarative REST calls)
-- [ ] Distributed Configuration (Spring Cloud Config)
-- [ ] Eventual Consistency
-- [ ] Saga Pattern (Orchestration, Choreography)
-- [ ] CQRS (Command Query Responsibility Segregation)
-- [ ] Event Sourcing
-
-### **C. CI/CD & DEVOPS**
-- [ ] **Jenkins / GitHub Actions / GitLab CI**
-  - Pipeline as Code
-  - Build, Test, Deploy stages
-- [ ] **Kubernetes** (Container Orchestration)
-  - Pods, Services, Deployments, Ingress
-  - ConfigMaps, Secrets
-  - Helm Charts
-- [ ] **Terraform** (Infrastructure as Code)
-- [ ] **Monitoring** (Prometheus, Grafana)
-- [ ] **Logging** (ELK Stack - Elasticsearch, Logstash, Kibana)
-
-### **D. ADVANCED BACKEND**
-- [ ] **WebSockets** (STOMP, SockJS)
-- [ ] **Server-Sent Events (SSE)**
-- [ ] **GraphQL** (Schema, Resolvers, Apollo)
-- [ ] **gRPC** (Protocol Buffers)
-- [ ] **Quartz Scheduler** (Advanced scheduling)
-- [ ] **Apache Kafka** (Stream processing, Event streaming)
-- [ ] **Elasticsearch** (Search, Analytics)
-
-### **E. ADVANCED REACT**
-- [ ] **React 18+ Features**
-  - Concurrent Mode
-  - startTransition, useTransition
-  - useDeferredValue
-  - Suspense (Data fetching, Lazy loading)
-- [ ] **Error Boundaries**
-- [ ] **Higher-Order Components (HOCs)**
-- [ ] **Render Props**
-- [ ] **Compound Components**
-- [ ] **Reusable Component Libraries**
-- [ ] **Webpack** (Bundling, loaders, plugins)
-- [ ] **Vite** (Build tool optimization)
-
-### **F. TESTING (Biggest Gap)**
-- [ ] **Frontend Testing**
-  - Unit Testing (Jest, Vitest)
-  - Component Testing (React Testing Library)
-  - E2E Testing (Cypress, Playwright)
-  - Snapshot Testing
-- [ ] **Backend Testing**
-  - Integration Testing
-  - Contract Testing (Pact)
-  - Performance Testing (JMeter, k6)
-
-### **G. SECURITY (Deepen Knowledge)**
-- [ ] **OWASP Top 10**
-  - SQL Injection
-  - XSS (Cross-Site Scripting)
-  - CSRF (Cross-Site Request Forgery)
-  - SSRF (Server-Side Request Forgery)
-- [ ] **Encryption** (AES, RSA)
-- [ ] **SSL/TLS** (HTTPS)
-- [ ] **OAuth2** & **OpenID Connect**
-- [ ] **SAML**
-- [ ] **Vault** (Secret management)
-- [ ] **API Keys** & **Rate Limiting**
-
-### **H. DATA STRUCTURES & ALGORITHMS (For FAANG/Product Companies)**
-- [ ] Arrays, Strings, Linked Lists
-- [ ] Stacks & Queues
-- [ ] Trees (BST, AVL, Red-Black)
-- [ ] Graphs (BFS, DFS, Dijkstra)
-- [ ] Sorting (QuickSort, MergeSort, HeapSort)
-- [ ] Searching (Binary Search)
-- [ ] Dynamic Programming
-- [ ] Recursion & Backtracking
-- [ ] HashMap, HashSet (Implementation)
-- [ ] Heaps (Priority Queue)
-- [ ] Sliding Window & Two-Pointer Technique
-
----
-
-## 📅 **PREPARATION PLAN (Suggested Timeline)**
-
-| Week | Focus Area | Topics |
-|------|------------|--------|
-| **Week 1-2** | **Core Backend** | Java, Spring Boot, JPA, REST APIs, Security |
-| **Week 3-4** | **Core Frontend** | React, Hooks, State Management, TypeScript, Performance |
-| **Week 5** | **Database + Tools** | PostgreSQL, Git, Postman, JIRA |
-| **Week 6** | **Gap Fillers** | Testing (JUnit, Mockito, Jest), Docker, System Design Basics |
-| **Week 7** | **Projects Revision** | Rebuild your projects, know every line of code |
-| **Week 8** | **Mock Interviews** | Practice coding, system design, behavioral |
-
----
-
-## 📝 **REVISION CHECKLIST (Quick Reference)**
-
-### **Top 30 Must-Know Questions for Your Level**
-
-1. Explain React lifecycle (hooks equivalent).
-2. Difference between `useMemo` and `useCallback`.
-3. How does Redux Toolkit work?
-4. What is TanStack Query and why use it?
-5. How to optimize React performance?
-6. What is dependency injection in Spring?
-7. Explain Spring Security JWT flow (your implementation).
-8. What is the N+1 query problem? How to solve it?
-9. Difference between `@RestController` and `@Controller`.
-10. How to handle exceptions globally in Spring?
-11. What is `@Transactional` and how does it work?
-12. Difference between `@RequestParam` and `@PathVariable`.
-13. How does JWT refresh token rotation work?
-14. What is CORS and how to fix it?
-15. Explain soft delete implementation.
-16. How to schedule tasks in Spring Boot?
-17. What is the difference between `@Entity` and `@Table`?
-18. Explain JPA cascade types.
-19. What is Hibernate dirty checking?
-20. Difference between `git merge` and `git rebase`.
-21. How to design a RESTful API?
-22. What is the difference between authentication and authorization?
-23. Explain `@PreAuthorize` in Spring Security.
-24. How to implement pagination in Spring Data JPA?
-25. What is the CAP theorem?
-26. Difference between microservices and monolithic architecture.
-27. How to implement caching with Redis?
-28. What is Docker and why use it?
-29. Difference between SQL and NoSQL.
-30. How to write a unit test with Mockito?
-
----
-
-## 🎯 **FINAL RECOMMENDATION**
-
-**Immediate Focus (Next 2 Weeks):**
-- ✅ Spring Security + JWT (your core strength)
-- ✅ React hooks + state management
-- ✅ JPA/Hibernate optimization techniques
-- ✅ Start learning **JUnit + Mockito** (biggest resume gap)
-- ✅ Docker basics
-
-**Long-term (Next 3-6 Months):**
-- 📚 System Design (read "Designing Data-Intensive Applications")
-- 📚 Microservices with Spring Cloud
-- 📚 Testing (Cypress for frontend, Testcontainers for backend)
-- 📚 Kubernetes
-- 📚 DSA for coding interviews
-
----
-
-**Good luck with your preparation, Aman! You have a solid foundation—with focused effort on testing, system design, and DevOps, you'll be ready for senior roles in 12-18 months.** 💪
+interview-preparation/
+│
+├── README.md
+│
+├── 01-java/
+│   ├── 01-java-fundamentals.md
+│   ├── 02-oop.md
+│   ├── 03-strings.md
+│   ├── 04-arrays.md
+│   ├── 05-exception-handling.md
+│   ├── 06-collections.md
+│   ├── 07-generics.md
+│   ├── 08-equals-hashcode.md
+│   ├── 09-java-8.md
+│   ├── 10-lambda.md
+│   ├── 11-stream-api.md
+│   ├── 12-optional.md
+│   ├── 13-multithreading.md
+│   ├── 14-concurrency.md
+│   ├── 15-jvm-memory.md
+│   └── 16-interview-questions.md
+│
+├── 02-dsa/
+│   ├── 01-complexity.md
+│   ├── 02-arrays.md
+│   ├── 03-strings.md
+│   ├── 04-hashmap-hashset.md
+│   ├── 05-two-pointers.md
+│   ├── 06-sliding-window.md
+│   ├── 07-stack.md
+│   ├── 08-queue.md
+│   ├── 09-linked-list.md
+│   ├── 10-binary-search.md
+│   ├── 11-recursion.md
+│   ├── 12-trees.md
+│   ├── 13-heaps.md
+│   └── 14-interview-patterns.md
+│
+├── 03-javascript/
+│   ├── 01-fundamentals.md
+│   ├── 02-scope.md
+│   ├── 03-hoisting.md
+│   ├── 04-closures.md
+│   ├── 05-this.md
+│   ├── 06-prototypes.md
+│   ├── 07-functions.md
+│   ├── 08-array-methods.md
+│   ├── 09-promises.md
+│   ├── 10-async-await.md
+│   ├── 11-event-loop.md
+│   ├── 12-callbacks.md
+│   ├── 13-error-handling.md
+│   └── 14-interview-questions.md
+│
+├── 04-typescript/
+│   ├── 01-fundamentals.md
+│   ├── 02-types-vs-interfaces.md
+│   ├── 03-union-intersection.md
+│   ├── 04-generics.md
+│   ├── 05-type-narrowing.md
+│   ├── 06-utility-types.md
+│   ├── 07-functions.md
+│   ├── 08-classes.md
+│   ├── 09-advanced-types.md
+│   └── 10-interview-questions.md
+│
+├── 05-html-css/
+│   ├── 01-html.md
+│   ├── 02-semantic-html.md
+│   ├── 03-forms.md
+│   ├── 04-css-fundamentals.md
+│   ├── 05-flexbox.md
+│   ├── 06-grid.md
+│   ├── 07-responsive-design.md
+│   ├── 08-positioning.md
+│   ├── 09-specificity.md
+│   └── 10-interview-questions.md
+│
+├── 06-react/
+│   ├── 01-react-fundamentals.md
+│   ├── 02-components.md
+│   ├── 03-jsx.md
+│   ├── 04-props.md
+│   ├── 05-state.md
+│   ├── 06-events.md
+│   ├── 07-use-state.md
+│   ├── 08-use-effect.md
+│   ├── 09-use-ref.md
+│   ├── 10-use-memo.md
+│   ├── 11-use-callback.md
+│   ├── 12-custom-hooks.md
+│   ├── 13-virtual-dom.md
+│   ├── 14-reconciliation.md
+│   ├── 15-rendering.md
+│   ├── 16-performance.md
+│   ├── 17-code-splitting.md
+│   ├── 18-lazy-loading.md
+│   └── 19-interview-questions.md
+│
+├── 07-frontend-state/
+│   ├── 01-state-management.md
+│   ├── 02-redux-fundamentals.md
+│   ├── 03-redux-toolkit.md
+│   ├── 04-slices.md
+│   ├── 05-create-slice.md
+│   ├── 06-async-thunk.md
+│   ├── 07-redux-middleware.md
+│   ├── 08-zustand.md
+│   ├── 09-tanstack-query.md
+│   ├── 10-axios.md
+│   └── 11-interview-questions.md
+│
+├── 08-nextjs/
+│   ├── 01-fundamentals.md
+│   ├── 02-routing.md
+│   ├── 03-layouts.md
+│   ├── 04-server-components.md
+│   ├── 05-client-components.md
+│   ├── 06-rendering.md
+│   ├── 07-data-fetching.md
+│   ├── 08-caching.md
+│   ├── 09-api-routes.md
+│   ├── 10-middleware.md
+│   └── 11-interview-questions.md
+│
+├── 09-spring-core/
+│   ├── 01-spring-fundamentals.md
+│   ├── 02-ioc.md
+│   ├── 03-dependency-injection.md
+│   ├── 04-beans.md
+│   ├── 05-bean-lifecycle.md
+│   ├── 06-bean-scopes.md
+│   ├── 07-component-scanning.md
+│   ├── 08-annotations.md
+│   └── 09-interview-questions.md
+│
+├── 10-spring-boot/
+│   ├── 01-fundamentals.md
+│   ├── 02-project-structure.md
+│   ├── 03-auto-configuration.md
+│   ├── 04-starters.md
+│   ├── 05-configuration.md
+│   ├── 06-profiles.md
+│   ├── 07-controller.md
+│   ├── 08-service.md
+│   ├── 09-repository.md
+│   ├── 10-rest-api.md
+│   ├── 11-dto.md
+│   ├── 12-validation.md
+│   ├── 13-exception-handling.md
+│   ├── 14-pagination.md
+│   ├── 15-sorting.md
+│   ├── 16-scheduled-jobs.md
+│   └── 17-interview-questions.md
+│
+├── 11-spring-security/
+│   ├── 01-security-fundamentals.md
+│   ├── 02-authentication.md
+│   ├── 03-authorization.md
+│   ├── 04-password-security.md
+│   ├── 05-bcrypt.md
+│   ├── 06-jwt.md
+│   ├── 07-access-token.md
+│   ├── 08-refresh-token.md
+│   ├── 09-token-refresh-flow.md
+│   ├── 10-http-only-cookies.md
+│   ├── 11-rbac.md
+│   ├── 12-cors.md
+│   ├── 13-security-filter-chain.md
+│   └── 14-interview-questions.md
+│
+├── 12-jpa-hibernate/
+│   ├── 01-jpa-fundamentals.md
+│   ├── 02-entity.md
+│   ├── 03-primary-key.md
+│   ├── 04-relationships.md
+│   ├── 05-one-to-one.md
+│   ├── 06-one-to-many.md
+│   ├── 07-many-to-many.md
+│   ├── 08-lazy-vs-eager.md
+│   ├── 09-cascade.md
+│   ├── 10-fetch.md
+│   ├── 11-transactions.md
+│   ├── 12-n-plus-one.md
+│   ├── 13-query-methods.md
+│   ├── 14-jpql.md
+│   ├── 15-pagination.md
+│   └── 16-interview-questions.md
+│
+├── 13-sql-postgresql/
+│   ├── 01-sql-fundamentals.md
+│   ├── 02-select-where.md
+│   ├── 03-group-by-having.md
+│   ├── 04-order-by.md
+│   ├── 05-joins.md
+│   ├── 06-subqueries.md
+│   ├── 07-cte.md
+│   ├── 08-window-functions.md
+│   ├── 09-row-number-rank.md
+│   ├── 10-lag-lead.md
+│   ├── 11-indexes.md
+│   ├── 12-transactions.md
+│   ├── 13-acid.md
+│   ├── 14-isolation-levels.md
+│   ├── 15-query-optimization.md
+│   └── 16-interview-questions.md
+│
+├── 14-node-express/
+│   ├── 01-node-fundamentals.md
+│   ├── 02-event-loop.md
+│   ├── 03-modules.md
+│   ├── 04-express.md
+│   ├── 05-routing.md
+│   ├── 06-middleware.md
+│   ├── 07-error-handling.md
+│   ├── 08-authentication.md
+│   ├── 09-authorization.md
+│   ├── 10-drizzle-orm.md
+│   └── 11-interview-questions.md
+│
+├── 15-rest-api/
+│   ├── 01-rest-fundamentals.md
+│   ├── 02-http-methods.md
+│   ├── 03-status-codes.md
+│   ├── 04-request-response.md
+│   ├── 05-api-versioning.md
+│   ├── 06-pagination.md
+│   ├── 07-filtering-sorting.md
+│   ├── 08-error-response.md
+│   ├── 09-idempotency.md
+│   └── 10-interview-questions.md
+│
+├── 16-database-design/
+│   ├── 01-normalization.md
+│   ├── 02-denormalization.md
+│   ├── 03-keys.md
+│   ├── 04-indexing.md
+│   ├── 05-transactions.md
+│   ├── 06-concurrency.md
+│   └── 07-interview-questions.md
+│
+├── 17-system-design/
+│   ├── 01-fundamentals.md
+│   ├── 02-scalability.md
+│   ├── 03-load-balancing.md
+│   ├── 04-caching.md
+│   ├── 05-redis.md
+│   ├── 06-microservices.md
+│   ├── 07-message-queues.md
+│   ├── 08-api-gateway.md
+│   ├── 09-service-discovery.md
+│   ├── 10-url-shortener.md
+│   └── 11-ecommerce.md
+│
+├── 18-docker/
+│   ├── 01-fundamentals.md
+│   ├── 02-images.md
+│   ├── 03-containers.md
+│   ├── 04-dockerfile.md
+│   ├── 05-volumes.md
+│   ├── 06-networks.md
+│   ├── 07-docker-compose.md
+│   └── 08-interview-questions.md
+│
+├── 19-aws/
+│   ├── 01-cloud-fundamentals.md
+│   ├── 02-ec2.md
+│   ├── 03-s3.md
+│   ├── 04-rds.md
+│   ├── 05-iam.md
+│   ├── 06-deployment.md
+│   └── 07-interview-questions.md
+│
+├── 20-git-devops/
+│   ├── 01-git-fundamentals.md
+│   ├── 02-branching.md
+│   ├── 03-merge-rebase.md
+│   ├── 04-conflict-resolution.md
+│   ├── 05-github.md
+│   └── 06-ci-cd.md
+│
+├── 21-projects/
+│   ├── 01-antwalk.md
+│   ├── 02-linkly.md
+│   ├── 03-projecthub.md
+│   └── 04-cartzen.md
+│
+├── 22-resume-defense/
+│   ├── 01-summary.md
+│   ├── 02-technical-skills.md
+│   ├── 03-antwalk-experience.md
+│   ├── 04-linkly.md
+│   ├── 05-projecthub.md
+│   ├── 06-cartzen.md
+│   └── 07-resume-questions.md
+│
+├── 23-hr-behavioral/
+│   ├── 01-tell-me-about-yourself.md
+│   ├── 02-experience.md
+│   ├── 03-strengths-weaknesses.md
+│   ├── 04-project-explanation.md
+│   ├── 05-conflict.md
+│   ├── 06-challenges.md
+│   ├── 07-failure.md
+│   └── 08-hr-questions.md
+│
+└── 24-ai-agentic-development/
+    ├── 01-ai-assisted-development.md
+    ├── 02-github-copilot.md
+    ├── 03-copilot-agent-mode.md
+    ├── 04-prompting.md
+    ├── 05-agentic-workflows.md
+    ├── 06-ai-assisted-testing.md
+    ├── 07-ai-assisted-debugging.md
+    ├── 08-ai-assisted-sdlc.md
+    └── 09-interview-questions.md
