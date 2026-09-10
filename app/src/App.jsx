@@ -7,7 +7,8 @@ import "highlight.js/styles/github.css";
 import "./App.css";
 
 const modules = import.meta.glob("../../notes/**/*.md", {
-  as: "raw",
+  query: "?raw",
+  import: "default",
   eager: true,
 });
 

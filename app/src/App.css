@@ -275,7 +275,7 @@ body {
 
 /* ---------- Markdown ---------- */
 .markdown {
-  max-width: 820px;
+  /* max-width: 820px; */
   margin: 0 auto;
   line-height: 1.65;
   color: #1f2937;
