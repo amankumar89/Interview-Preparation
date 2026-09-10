@@ -13,9 +13,10 @@ The key idea behind Java is platform independence: Java source code is compiled 
 Java is especially important for developers because it combines strong typing, object-oriented design, a large standard library, and mature ecosystem tooling. In interviews, Java fundamentals are often tested because they form the foundation for OOP, collections, multithreading, JVM, and enterprise Java.
 
 > Related:
-> - 01-java/02-oop.md
-> - 01-java/06-collections.md
-> - 01-java/15-jvm-memory.md
+>
+> - 07-java/02-oop.md
+> - 07-java/06-collections.md
+> - 07-java/15-jvm-memory.md
 
 ---
 
@@ -26,11 +27,11 @@ Before Java, many programming languages were tied closely to a specific operatin
 Java solved this by introducing a common runtime model:
 
 Problem
-   ↓
+↓
 Platform-specific execution and deployment complexity
-   ↓
+↓
 Java compiles code to bytecode and runs it on the JVM
-   ↓
+↓
 Write once, run anywhere
 
 This gave developers several benefits:
@@ -59,11 +60,11 @@ Java is:
 
 ### 3.2 JDK, JRE, and JVM
 
-| Component | Meaning | Purpose |
-|---|---|---|
-| JDK | Java Development Kit | Tools to write, compile, and run Java programs |
-| JRE | Java Runtime Environment | Environment required to run Java applications |
-| JVM | Java Virtual Machine | Executes Java bytecode and manages runtime behavior |
+| Component | Meaning                  | Purpose                                             |
+| --------- | ------------------------ | --------------------------------------------------- |
+| JDK       | Java Development Kit     | Tools to write, compile, and run Java programs      |
+| JRE       | Java Runtime Environment | Environment required to run Java applications       |
+| JVM       | Java Virtual Machine     | Executes Java bytecode and manages runtime behavior |
 
 Conceptually:
 
@@ -347,13 +348,13 @@ Unchecked and checked exceptions must be handled thoughtfully. Poor error handli
 
 ## 11. Common Differences
 
-| Concept | Java behavior | Why it matters |
-|---|---|---|
-| Primitive vs Reference | Primitives store values directly; references point to objects | Affects memory and comparison |
-| `==` vs `equals()` | `==` compares references; `equals()` compares contents | Common source of bugs |
-| JDK vs JRE | JDK includes tools; JRE is runtime | Helps understand setup and deployment |
-| Compile-time vs runtime | Type checking happens before execution | Improves correctness and maintainability |
-| Object-oriented design vs procedural code | Java encourages classes and objects | Enables modular, testable systems |
+| Concept                                   | Java behavior                                                 | Why it matters                           |
+| ----------------------------------------- | ------------------------------------------------------------- | ---------------------------------------- |
+| Primitive vs Reference                    | Primitives store values directly; references point to objects | Affects memory and comparison            |
+| `==` vs `equals()`                        | `==` compares references; `equals()` compares contents        | Common source of bugs                    |
+| JDK vs JRE                                | JDK includes tools; JRE is runtime                            | Helps understand setup and deployment    |
+| Compile-time vs runtime                   | Type checking happens before execution                        | Improves correctness and maintainability |
+| Object-oriented design vs procedural code | Java encourages classes and objects                           | Enables modular, testable systems        |
 
 ---
 
@@ -553,19 +554,20 @@ These examples show why Java fundamentals are important in both daily coding and
 
 ## 16. Interview Cheat Sheet
 
-| Question | Remember |
-|---|---|
-| What is Java? | High-level, object-oriented, portable language |
-| Why is Java portable? | Bytecode runs on the JVM |
-| JDK vs JRE vs JVM | Tools vs runtime vs execution engine |
-| Why is `equals()` important? | It compares logical values, not just references |
-| Why does Java use GC? | Simplifies memory management |
-| What is the `main` method? | Program entry point |
+| Question                                | Remember                                         |
+| --------------------------------------- | ------------------------------------------------ |
+| What is Java?                           | High-level, object-oriented, portable language   |
+| Why is Java portable?                   | Bytecode runs on the JVM                         |
+| JDK vs JRE vs JVM                       | Tools vs runtime vs execution engine             |
+| Why is `equals()` important?            | It compares logical values, not just references  |
+| Why does Java use GC?                   | Simplifies memory management                     |
+| What is the `main` method?              | Program entry point                              |
 | Why is Java used in enterprise systems? | Stability, tooling, maintainability, portability |
 
 ---
 
 > Related:
-> - 01-java/02-oop.md
-> - 01-java/06-collections.md
-> - 01-java/15-jvm-memory.md
+>
+> - 07-java/02-oop.md
+> - 07-java/06-collections.md
+> - 07-java/15-jvm-memory.md

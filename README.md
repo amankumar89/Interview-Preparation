@@ -4,136 +4,145 @@
 
 - [README.md](README.md)
 
-### 01-java
-- [01-java](01-java/)
-  - [01-java-fundamentals](01-java/01-java-fundamentals.md)
-  - [02-oop](01-java/02-oop.md)
-  - [03-strings](01-java/03-strings.md)
-  - [04-arrays](01-java/04-arrays.md)
-  - [05-exception-handling](01-java/05-exception-handling.md)
-  - [06-collections](01-java/06-collections.md)
-  - [07-generics](01-java/07-generics.md)
-  - [08-equals-hashcode](01-java/08-equals-hashcode.md)
-  - [09-java-8](01-java/09-java-8.md)
-  - [10-lambda](01-java/10-lambda.md)
-  - [11-stream-api](01-java/11-stream-api.md)
-  - [12-optional](01-java/12-optional.md)
-  - [13-multithreading](01-java/13-multithreading.md)
-  - [14-concurrency](01-java/14-concurrency.md)
-  - [15-jvm-memory](01-java/15-jvm-memory.md)
-  - [16-interview-questions](01-java/16-interview-questions.md)
+### 01-html-css
 
-### 02-dsa
-- [02-dsa](02-dsa/)
-  - [01-complexity](02-dsa/01-complexity.md)
-  - [02-arrays](02-dsa/02-arrays.md)
-  - [03-strings](02-dsa/03-strings.md)
-  - [04-hashmap-hashset](02-dsa/04-hashmap-hashset.md)
-  - [05-two-pointers](02-dsa/05-two-pointers.md)
-  - [06-sliding-window](02-dsa/06-sliding-window.md)
-  - [07-stack](02-dsa/07-stack.md)
-  - [08-queue](02-dsa/08-queue.md)
-  - [09-linked-list](02-dsa/09-linked-list.md)
-  - [10-binary-search](02-dsa/10-binary-search.md)
-  - [11-recursion](02-dsa/11-recursion.md)
-  - [12-trees](02-dsa/12-trees.md)
-  - [13-heaps](02-dsa/13-heaps.md)
-  - [14-interview-patterns](02-dsa/14-interview-patterns.md)
+- [01-html-css](01-html-css/)
+  - [01-html](01-html-css/01-html.md)
+  - [02-semantic-html](01-html-css/02-semantic-html.md)
+  - [03-forms](01-html-css/03-forms.md)
+  - [04-css-fundamentals](01-html-css/04-css-fundamentals.md)
+  - [05-flexbox](01-html-css/05-flexbox.md)
+  - [06-grid](01-html-css/06-grid.md)
+  - [07-responsive-design](01-html-css/07-responsive-design.md)
+  - [08-positioning](01-html-css/08-positioning.md)
+  - [09-specificity](01-html-css/09-specificity.md)
+  - [10-interview-questions](01-html-css/10-interview-questions.md)
 
-### 03-javascript
-- [03-javascript](03-javascript/)
-  - [01-fundamentals](03-javascript/01-fundamentals.md)
-  - [02-scope](03-javascript/02-scope.md)
-  - [03-hoisting](03-javascript/03-hoisting.md)
-  - [04-closures](03-javascript/04-closures.md)
-  - [05-this](03-javascript/05-this.md)
-  - [06-prototypes](03-javascript/06-prototypes.md)
-  - [07-functions](03-javascript/07-functions.md)
-  - [08-array-methods](03-javascript/08-array-methods.md)
-  - [09-promises](03-javascript/09-promises.md)
-  - [10-async-await](03-javascript/10-async-await.md)
-  - [11-event-loop](03-javascript/11-event-loop.md)
-  - [12-callbacks](03-javascript/12-callbacks.md)
-  - [13-error-handling](03-javascript/13-error-handling.md)
-  - [14-interview-questions](03-javascript/14-interview-questions.md)
+### 02-javascript
 
-### 04-typescript
-- [04-typescript](04-typescript/)
-  - [01-fundamentals](04-typescript/01-fundamentals.md)
-  - [02-types-vs-interfaces](04-typescript/02-types-vs-interfaces.md)
-  - [03-union-intersection](04-typescript/03-union-intersection.md)
-  - [04-generics](04-typescript/04-generics.md)
-  - [05-type-narrowing](04-typescript/05-type-narrowing.md)
-  - [06-utility-types](04-typescript/06-utility-types.md)
-  - [07-functions](04-typescript/07-functions.md)
-  - [08-classes](04-typescript/08-classes.md)
-  - [09-advanced-types](04-typescript/09-advanced-types.md)
-  - [10-interview-questions](04-typescript/10-interview-questions.md)
+- [02-javascript](02-javascript/)
+  - [01-fundamentals](02-javascript/01-fundamentals.md)
+  - [02-scope](02-javascript/02-scope.md)
+  - [03-hoisting](02-javascript/03-hoisting.md)
+  - [04-closures](02-javascript/04-closures.md)
+  - [05-this](02-javascript/05-this.md)
+  - [06-prototypes](02-javascript/06-prototypes.md)
+  - [07-functions](02-javascript/07-functions.md)
+  - [08-array-methods](02-javascript/08-array-methods.md)
+  - [09-promises](02-javascript/09-promises.md)
+  - [10-async-await](02-javascript/10-async-await.md)
+  - [11-event-loop](02-javascript/11-event-loop.md)
+  - [12-callbacks](02-javascript/12-callbacks.md)
+  - [13-error-handling](02-javascript/13-error-handling.md)
+  - [14-interview-questions](02-javascript/14-interview-questions.md)
 
-### 05-html-css
-- [05-html-css](05-html-css/)
-  - [01-html](05-html-css/01-html.md)
-  - [02-semantic-html](05-html-css/02-semantic-html.md)
-  - [03-forms](05-html-css/03-forms.md)
-  - [04-css-fundamentals](05-html-css/04-css-fundamentals.md)
-  - [05-flexbox](05-html-css/05-flexbox.md)
-  - [06-grid](05-html-css/06-grid.md)
-  - [07-responsive-design](05-html-css/07-responsive-design.md)
-  - [08-positioning](05-html-css/08-positioning.md)
-  - [09-specificity](05-html-css/09-specificity.md)
-  - [10-interview-questions](05-html-css/10-interview-questions.md)
+### 03-typescript
 
-### 06-react
-- [06-react](06-react/)
-  - [01-react-fundamentals](06-react/01-react-fundamentals.md)
-  - [02-components](06-react/02-components.md)
-  - [03-jsx](06-react/03-jsx.md)
-  - [04-props](06-react/04-props.md)
-  - [05-state](06-react/05-state.md)
-  - [06-events](06-react/06-events.md)
-  - [07-use-state](06-react/07-use-state.md)
-  - [08-use-effect](06-react/08-use-effect.md)
-  - [09-use-ref](06-react/09-use-ref.md)
-  - [10-use-memo](06-react/10-use-memo.md)
-  - [11-use-callback](06-react/11-use-callback.md)
-  - [12-custom-hooks](06-react/12-custom-hooks.md)
-  - [13-virtual-dom](06-react/13-virtual-dom.md)
-  - [14-reconciliation](06-react/14-reconciliation.md)
-  - [15-rendering](06-react/15-rendering.md)
-  - [16-performance](06-react/16-performance.md)
-  - [17-code-splitting](06-react/17-code-splitting.md)
-  - [18-lazy-loading](06-react/18-lazy-loading.md)
-  - [19-interview-questions](06-react/19-interview-questions.md)
+- [03-typescript](03-typescript/)
+  - [01-fundamentals](03-typescript/01-fundamentals.md)
+  - [02-types-vs-interfaces](03-typescript/02-types-vs-interfaces.md)
+  - [03-union-intersection](03-typescript/03-union-intersection.md)
+  - [04-generics](03-typescript/04-generics.md)
+  - [05-type-narrowing](03-typescript/05-type-narrowing.md)
+  - [06-utility-types](03-typescript/06-utility-types.md)
+  - [07-functions](03-typescript/07-functions.md)
+  - [08-classes](03-typescript/08-classes.md)
+  - [09-advanced-types](03-typescript/09-advanced-types.md)
+  - [10-interview-questions](03-typescript/10-interview-questions.md)
 
-### 07-frontend-state
-- [07-frontend-state](07-frontend-state/)
-  - [01-state-management](07-frontend-state/01-state-management.md)
-  - [02-redux-fundamentals](07-frontend-state/02-redux-fundamentals.md)
-  - [03-redux-toolkit](07-frontend-state/03-redux-toolkit.md)
-  - [04-slices](07-frontend-state/04-slices.md)
-  - [05-create-slice](07-frontend-state/05-create-slice.md)
-  - [06-async-thunk](07-frontend-state/06-async-thunk.md)
-  - [07-redux-middleware](07-frontend-state/07-redux-middleware.md)
-  - [08-zustand](07-frontend-state/08-zustand.md)
-  - [09-tanstack-query](07-frontend-state/09-tanstack-query.md)
-  - [10-axios](07-frontend-state/10-axios.md)
-  - [11-interview-questions](07-frontend-state/11-interview-questions.md)
+### 04-react
 
-### 08-nextjs
-- [08-nextjs](08-nextjs/)
-  - [01-fundamentals](08-nextjs/01-fundamentals.md)
-  - [02-routing](08-nextjs/02-routing.md)
-  - [03-layouts](08-nextjs/03-layouts.md)
-  - [04-server-components](08-nextjs/04-server-components.md)
-  - [05-client-components](08-nextjs/05-client-components.md)
-  - [06-rendering](08-nextjs/06-rendering.md)
-  - [07-data-fetching](08-nextjs/07-data-fetching.md)
-  - [08-caching](08-nextjs/08-caching.md)
-  - [09-api-routes](08-nextjs/09-api-routes.md)
-  - [10-middleware](08-nextjs/10-middleware.md)
-  - [11-interview-questions](08-nextjs/11-interview-questions.md)
+- [04-react](04-react/)
+  - [01-react-fundamentals](04-react/01-react-fundamentals.md)
+  - [02-components](04-react/02-components.md)
+  - [03-jsx](04-react/03-jsx.md)
+  - [04-props](04-react/04-props.md)
+  - [05-state](04-react/05-state.md)
+  - [06-events](04-react/06-events.md)
+  - [07-use-state](04-react/07-use-state.md)
+  - [08-use-effect](04-react/08-use-effect.md)
+  - [09-use-ref](04-react/09-use-ref.md)
+  - [10-use-memo](04-react/10-use-memo.md)
+  - [11-use-callback](04-react/11-use-callback.md)
+  - [12-custom-hooks](04-react/12-custom-hooks.md)
+  - [13-virtual-dom](04-react/13-virtual-dom.md)
+  - [14-reconciliation](04-react/14-reconciliation.md)
+  - [15-rendering](04-react/15-rendering.md)
+  - [16-performance](04-react/16-performance.md)
+  - [17-code-splitting](04-react/17-code-splitting.md)
+  - [18-lazy-loading](04-react/18-lazy-loading.md)
+  - [19-interview-questions](04-react/19-interview-questions.md)
+
+### 05-frontend-state
+
+- [05-frontend-state](05-frontend-state/)
+  - [01-state-management](05-frontend-state/01-state-management.md)
+  - [02-redux-fundamentals](05-frontend-state/02-redux-fundamentals.md)
+  - [03-redux-toolkit](05-frontend-state/03-redux-toolkit.md)
+  - [04-slices](05-frontend-state/04-slices.md)
+  - [05-create-slice](05-frontend-state/05-create-slice.md)
+  - [06-async-thunk](05-frontend-state/06-async-thunk.md)
+  - [07-redux-middleware](05-frontend-state/07-redux-middleware.md)
+  - [08-zustand](05-frontend-state/08-zustand.md)
+  - [09-tanstack-query](05-frontend-state/09-tanstack-query.md)
+  - [10-axios](05-frontend-state/10-axios.md)
+  - [11-interview-questions](05-frontend-state/11-interview-questions.md)
+
+### 06-nextjs
+
+- [06-nextjs](06-nextjs/)
+  - [01-fundamentals](06-nextjs/01-fundamentals.md)
+  - [02-routing](06-nextjs/02-routing.md)
+  - [03-layouts](06-nextjs/03-layouts.md)
+  - [04-server-components](06-nextjs/04-server-components.md)
+  - [05-client-components](06-nextjs/05-client-components.md)
+  - [06-rendering](06-nextjs/06-rendering.md)
+  - [07-data-fetching](06-nextjs/07-data-fetching.md)
+  - [08-caching](06-nextjs/08-caching.md)
+  - [09-api-routes](06-nextjs/09-api-routes.md)
+  - [10-middleware](06-nextjs/10-middleware.md)
+  - [11-interview-questions](06-nextjs/11-interview-questions.md)
+
+### 07-java
+
+- [07-java](07-java/)
+  - [01-java-fundamentals](07-java/01-java-fundamentals.md)
+  - [02-oop](07-java/02-oop.md)
+  - [03-strings](07-java/03-strings.md)
+  - [04-arrays](07-java/04-arrays.md)
+  - [05-exception-handling](07-java/05-exception-handling.md)
+  - [06-collections](07-java/06-collections.md)
+  - [07-generics](07-java/07-generics.md)
+  - [08-equals-hashcode](07-java/08-equals-hashcode.md)
+  - [09-java-8](07-java/09-java-8.md)
+  - [10-lambda](07-java/10-lambda.md)
+  - [11-stream-api](07-java/11-stream-api.md)
+  - [12-optional](07-java/12-optional.md)
+  - [13-multithreading](07-java/13-multithreading.md)
+  - [14-concurrency](07-java/14-concurrency.md)
+  - [15-jvm-memory](07-java/15-jvm-memory.md)
+  - [16-interview-questions](07-java/16-interview-questions.md)
+
+### 08-dsa
+
+- [08-dsa](08-dsa/)
+  - [01-complexity](08-dsa/01-complexity.md)
+  - [02-arrays](08-dsa/02-arrays.md)
+  - [03-strings](08-dsa/03-strings.md)
+  - [04-hashmap-hashset](08-dsa/04-hashmap-hashset.md)
+  - [05-two-pointers](08-dsa/05-two-pointers.md)
+  - [06-sliding-window](08-dsa/06-sliding-window.md)
+  - [07-stack](08-dsa/07-stack.md)
+  - [08-queue](08-dsa/08-queue.md)
+  - [09-linked-list](08-dsa/09-linked-list.md)
+  - [10-binary-search](08-dsa/10-binary-search.md)
+  - [11-recursion](08-dsa/11-recursion.md)
+  - [12-trees](08-dsa/12-trees.md)
+  - [13-heaps](08-dsa/13-heaps.md)
+  - [14-interview-patterns](08-dsa/14-interview-patterns.md)
 
 ### 09-spring-core
+
 - [09-spring-core](09-spring-core/)
   - [01-spring-fundamentals](09-spring-core/01-spring-fundamentals.md)
   - [02-ioc](09-spring-core/02-ioc.md)
@@ -146,6 +155,7 @@
   - [09-interview-questions](09-spring-core/09-interview-questions.md)
 
 ### 10-spring-boot
+
 - [10-spring-boot](10-spring-boot/)
   - [01-fundamentals](10-spring-boot/01-fundamentals.md)
   - [02-project-structure](10-spring-boot/02-project-structure.md)
@@ -166,6 +176,7 @@
   - [17-interview-questions](10-spring-boot/17-interview-questions.md)
 
 ### 11-spring-security
+
 - [11-spring-security](11-spring-security/)
   - [01-security-fundamentals](11-spring-security/01-security-fundamentals.md)
   - [02-authentication](11-spring-security/02-authentication.md)
@@ -183,6 +194,7 @@
   - [14-interview-questions](11-spring-security/14-interview-questions.md)
 
 ### 12-jpa-hibernate
+
 - [12-jpa-hibernate](12-jpa-hibernate/)
   - [01-jpa-fundamentals](12-jpa-hibernate/01-jpa-fundamentals.md)
   - [02-entity](12-jpa-hibernate/02-entity.md)
@@ -202,6 +214,7 @@
   - [16-interview-questions](12-jpa-hibernate/16-interview-questions.md)
 
 ### 13-sql-postgresql
+
 - [13-sql-postgresql](13-sql-postgresql/)
   - [01-sql-fundamentals](13-sql-postgresql/01-sql-fundamentals.md)
   - [02-select-where](13-sql-postgresql/02-select-where.md)
@@ -221,6 +234,7 @@
   - [16-interview-questions](13-sql-postgresql/16-interview-questions.md)
 
 ### 14-node-express
+
 - [14-node-express](14-node-express/)
   - [01-node-fundamentals](14-node-express/01-node-fundamentals.md)
   - [02-event-loop](14-node-express/02-event-loop.md)
@@ -235,6 +249,7 @@
   - [11-interview-questions](14-node-express/11-interview-questions.md)
 
 ### 15-rest-api
+
 - [15-rest-api](15-rest-api/)
   - [01-rest-fundamentals](15-rest-api/01-rest-fundamentals.md)
   - [02-http-methods](15-rest-api/02-http-methods.md)
@@ -248,6 +263,7 @@
   - [10-interview-questions](15-rest-api/10-interview-questions.md)
 
 ### 16-database-design
+
 - [16-database-design](16-database-design/)
   - [01-normalization](16-database-design/01-normalization.md)
   - [02-denormalization](16-database-design/02-denormalization.md)
@@ -258,6 +274,7 @@
   - [07-interview-questions](16-database-design/07-interview-questions.md)
 
 ### 17-system-design
+
 - [17-system-design](17-system-design/)
   - [01-fundamentals](17-system-design/01-fundamentals.md)
   - [02-scalability](17-system-design/02-scalability.md)
@@ -272,6 +289,7 @@
   - [11-ecommerce](17-system-design/11-ecommerce.md)
 
 ### 18-docker
+
 - [18-docker](18-docker/)
   - [01-fundamentals](18-docker/01-fundamentals.md)
   - [02-images](18-docker/02-images.md)
@@ -283,6 +301,7 @@
   - [08-interview-questions](18-docker/08-interview-questions.md)
 
 ### 19-aws
+
 - [19-aws](19-aws/)
   - [01-cloud-fundamentals](19-aws/01-cloud-fundamentals.md)
   - [02-ec2](19-aws/02-ec2.md)
@@ -293,6 +312,7 @@
   - [07-interview-questions](19-aws/07-interview-questions.md)
 
 ### 20-git-devops
+
 - [20-git-devops](20-git-devops/)
   - [01-git-fundamentals](20-git-devops/01-git-fundamentals.md)
   - [02-branching](20-git-devops/02-branching.md)
@@ -302,6 +322,7 @@
   - [06-ci-cd](20-git-devops/06-ci-cd.md)
 
 ### 21-projects
+
 - [21-projects](21-projects/)
   - [01-antwalk](21-projects/01-antwalk.md)
   - [02-linkly](21-projects/02-linkly.md)
@@ -309,6 +330,7 @@
   - [04-cartzen](21-projects/04-cartzen.md)
 
 ### 22-resume-defense
+
 - [22-resume-defense](22-resume-defense/)
   - [01-summary](22-resume-defense/01-summary.md)
   - [02-technical-skills](22-resume-defense/02-technical-skills.md)
@@ -319,6 +341,7 @@
   - [07-resume-questions](22-resume-defense/07-resume-questions.md)
 
 ### 23-hr-behavioral
+
 - [23-hr-behavioral](23-hr-behavioral/)
   - [01-tell-me-about-yourself](23-hr-behavioral/01-tell-me-about-yourself.md)
   - [02-experience](23-hr-behavioral/02-experience.md)
@@ -330,6 +353,7 @@
   - [08-hr-questions](23-hr-behavioral/08-hr-questions.md)
 
 ### 24-ai-agentic-development
+
 - [24-ai-agentic-development](24-ai-agentic-development/)
   - [01-ai-assisted-development](24-ai-agentic-development/01-ai-assisted-development.md)
   - [02-github-copilot](24-ai-agentic-development/02-github-copilot.md)
