@@ -84,6 +84,12 @@ or scenario) if it helps understanding.
 (Repeat for every real subtopic the topic has. Skip subtopics that don't exist
 for this topic — do not force a fixed number of sections.)
 
+## Key Takeaways
+
+A short bullet list (roughly 4-8 points) recapping the most important points
+from the notes above — the things someone should remember even if they forget
+everything else. Keep each bullet to one line.
+
 ## Practice Questions
 
 A short set of questions (roughly 3-6, scale with topic size) to test
