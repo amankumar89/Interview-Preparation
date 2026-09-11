@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import "highlight.js/styles/github.css";
+import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
 
 const modules = import.meta.glob("../../notes/**/*.md", {
@@ -11,6 +11,88 @@ const modules = import.meta.glob("../../notes/**/*.md", {
   import: "default",
   eager: true,
 });
+
+// Friendly display names for known topic folders. Anything not listed
+// falls back to a generic title-cased version of the folder name.
+const FOLDER_LABELS = {
+  "html-css": "HTML & CSS",
+  javascript: "JavaScript",
+  typescript: "TypeScript",
+  react: "React",
+  "frontend-state": "Frontend State",
+  nextjs: "Next.js",
+  java: "Java",
+  dsa: "DSA",
+  "spring-core": "Spring Core",
+  "spring-boot": "Spring Boot",
+  "spring-security": "Spring Security",
+  "jpa-hibernate": "JPA & Hibernate",
+  "sql-postgresql": "SQL & PostgreSQL",
+  "node-express": "Node & Express",
+  "rest-api": "REST APIs",
+  "database-design": "Database Design",
+  "system-design": "System Design",
+  docker: "Docker",
+  aws: "AWS",
+  "git-devops": "Git & DevOps",
+  projects: "Projects",
+  "resume-defense": "Resume Defense",
+  "hr-behavioral": "HR & Behavioral",
+  "ai-agentic-development": "AI & Agentic Dev",
+};
+
+// Words that should render as-is (all caps) rather than title-cased.
+const ACRONYMS = new Set([
+  "html",
+  "css",
+  "js",
+  "jsx",
+  "ts",
+  "tsx",
+  "sql",
+  "api",
+  "apis",
+  "rest",
+  "jpa",
+  "aws",
+  "hr",
+  "ai",
+  "jwt",
+  "cors",
+  "dom",
+  "http",
+  "https",
+  "crud",
+  "orm",
+  "ci",
+  "cd",
+]);
+
+function titleCaseFallback(slug) {
+  return slug
+    .split("-")
+    .map((w) =>
+      ACRONYMS.has(w.toLowerCase())
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
+}
+
+// Turns "01-html-css" into "HTML & CSS", keeping the numeric prefix
+// available separately for ordering/badges if ever needed.
+function prettyFolder(folder) {
+  const match = folder.match(/^(\d+)-(.+)$/);
+  const slug = match ? match[2] : folder;
+  return FOLDER_LABELS[slug] || titleCaseFallback(slug);
+}
+
+// Turns "08-array-methods" into "Array Methods".
+function prettyNote(name) {
+  const match = name.match(/^(\d+)-(.+)$/);
+  const slug = match ? match[2] : name;
+  return titleCaseFallback(slug);
+}
 
 function buildTree(mods) {
   const tree = {};
@@ -28,10 +110,6 @@ function buildTree(mods) {
     );
   }
   return tree;
-}
-
-function prettyFolder(name) {
-  return name.replace(/^(\d+)-/, "$1  ");
 }
 
 // Reactive viewport check
@@ -79,6 +157,14 @@ export default function App() {
   const toggleFolder = (folder) =>
     setOpenFolders((prev) => ({ ...prev, [folder]: !prev[folder] }));
 
+  const openAll = () =>
+    setOpenFolders(Object.fromEntries(Object.keys(tree).map((k) => [k, true])));
+
+  const closeAll = () =>
+    setOpenFolders(
+      Object.fromEntries(Object.keys(tree).map((k) => [k, false])),
+    );
+
   const selectNote = (slug) => {
     setActiveSlug(slug);
     if (isMobile) setDrawerOpen(false); // auto-close drawer on mobile
@@ -110,6 +196,8 @@ export default function App() {
     .filter(Boolean)
     .join(" ");
 
+  const railHidden = isMobile === false && railCollapsed;
+
   return (
     <div className={`app ${isMobile ? "is-mobile" : "is-desktop"}`}>
       {/* ---- Mobile top bar ---- */}
@@ -122,7 +210,9 @@ export default function App() {
           >
             ☰
           </button>
-          <span className="topbar-title">{active ? active.name : "Notes"}</span>
+          <span className="topbar-title">
+            {active ? prettyNote(active.name) : "Notes"}
+          </span>
           <span style={{ width: 26 }} />
         </header>
       )}
@@ -135,7 +225,12 @@ export default function App() {
       {/* ---- Sidebar ---- */}
       <aside className={sidebarClasses}>
         <div className="sidebar-header">
-          {!(isMobile ? false : railCollapsed) && <strong>Notes</strong>}
+          {!railHidden && (
+            <span className="brand">
+              <span className="brand-mark">IP</span>
+              <span className="brand-name">Interview Prep</span>
+            </span>
+          )}
 
           {/* Desktop: collapse rail. Mobile: close drawer */}
           <button
@@ -155,7 +250,7 @@ export default function App() {
           </button>
         </div>
 
-        {!(isMobile === false && railCollapsed) && (
+        {!railHidden && (
           <input
             className="search"
             placeholder="Search notes…"
@@ -164,7 +259,19 @@ export default function App() {
           />
         )}
 
-        {!(isMobile === false && railCollapsed) && (
+        {!railHidden && !filtered && (
+          <div className="tree-actions">
+            <button className="link-btn" onClick={openAll}>
+              Open all
+            </button>
+            <span className="tree-actions-sep">·</span>
+            <button className="link-btn" onClick={closeAll}>
+              Close all
+            </button>
+          </div>
+        )}
+
+        {!railHidden && (
           <nav className="nav">
             {filtered ? (
               <>
@@ -175,7 +282,8 @@ export default function App() {
                     className={`item ${n.slug === activeSlug ? "active" : ""}`}
                     onClick={() => selectNote(n.slug)}
                   >
-                    {n.folder} / {n.name}
+                    <span className="item-crumb">{prettyFolder(n.folder)}</span>
+                    <span className="item-name">{prettyNote(n.name)}</span>
                   </div>
                 ))}
               </>
@@ -207,9 +315,9 @@ export default function App() {
                               n.slug === activeSlug ? "active" : ""
                             }`}
                             onClick={() => selectNote(n.slug)}
-                            title={n.name}
+                            title={prettyNote(n.name)}
                           >
-                            {n.name}
+                            {prettyNote(n.name)}
                           </div>
                         ))}
                       </div>
@@ -226,6 +334,7 @@ export default function App() {
       <main className="content">
         {active ? (
           <article className="markdown">
+            <p className="crumb">{prettyFolder(active.folder)}</p>
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeSlug, rehypeHighlight]}
