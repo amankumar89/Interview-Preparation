@@ -1,4 +1,4 @@
-# Notes Generator
+# Interview Preparation
 
 Generate structured Markdown study notes on any topic using Claude, Gemini, or
 GitHub Copilot — with identical output structure across all three.
