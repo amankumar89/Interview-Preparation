@@ -41,3 +41,23 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q7. How do you reduce a slow or flaky Spring integration test suite?**
 
 **Answer:** Use unit tests and test slices for narrow behavior, reserve full-context tests for integration contracts, and avoid shared mutable state. Reuse expensive containers when supported, control asynchronous work and timeouts, and investigate nondeterministic dependencies instead of adding arbitrary delays.
+
+**Q8. What is the difference between `MockMvc` and testing through a real HTTP port?**
+
+**Answer:** `MockMvc` exercises Spring MVC request handling without starting a real network server, so it is fast and useful for controller behavior. A test using a random server port also covers the embedded server and actual HTTP communication, making it better for a smaller number of end-to-end web checks.
+
+**Q9. How can a test supply configuration that is different from the normal application configuration?**
+
+**Answer:** Use test property overrides, a test profile, or a test configuration source appropriate to the test. For values required by external services or containers, register the runtime-provided connection details rather than hard-coding machine-specific addresses.
+
+**Q10. Why can a transactional test give a misleading result when it calls an HTTP endpoint?**
+
+**Answer:** The test transaction and the server request may run on different threads and use different transactions. Rolling back the test thread's transaction does not necessarily roll back work committed by the HTTP request, so verify transaction boundaries explicitly and clean up any persisted data.
+
+**Q11. How do you test application behavior that depends on an external service?**
+
+**Answer:** Use a mock or stub when the test is isolating application decisions, and use a real disposable dependency when the integration contract matters. Keep the boundary explicit, avoid calling unstable production services from automated tests, and make test data and cleanup deterministic.
+
+**Q12. What should a Spring Boot test verify beyond the returned response body?**
+
+**Answer:** Assert relevant status codes, headers, content types, and observable side effects. For invalid requests, also verify that downstream work was not performed; for successful writes, verify persistence or emitted events at the appropriate test boundary.
