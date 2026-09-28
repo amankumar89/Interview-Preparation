@@ -92,7 +92,11 @@ export function buildTree(modules) {
     );
   }
 
-  return tree;
+  return Object.fromEntries(
+    Object.entries(tree).sort(([a], [b]) =>
+      a.localeCompare(b, undefined, { numeric: true }),
+    ),
+  );
 }
 
 export function flattenNotes(tree) {

@@ -19,11 +19,15 @@ function NoteItem({ note, activeSlug, onSelect, showFolder }) {
 
 function SidebarNavigation({
   tree,
+  hiddenFolders,
+  hiddenTopicsOpen,
   filtered,
   openFolders,
   activeSlug,
   onSelect,
   onToggleFolder,
+  onToggleHiddenFolder,
+  onToggleHiddenTopics,
 }) {
   if (filtered) {
     return (
@@ -42,39 +46,97 @@ function SidebarNavigation({
     );
   }
 
-  return Object.entries(tree).map(([folder, items]) => {
-    const isOpen = openFolders[folder] ?? true;
+  const visibleTopics = Object.entries(tree).filter(
+    ([folder]) => !hiddenFolders.includes(folder),
+  );
+  const hiddenTopics = Object.entries(tree).filter(([folder]) =>
+    hiddenFolders.includes(folder),
+  );
 
-    return (
-      <div key={folder} className="group">
-        <button
-          className="folder"
-          onClick={() => onToggleFolder(folder)}
-          aria-expanded={isOpen}
-        >
-          <span className={`chevron ${isOpen ? "open" : ""}`}>▶</span>
-          <span className="folder-name">{prettyFolder(folder)}</span>
-          <span className="count">{items.length}</span>
-        </button>
-        {isOpen && (
-          <div className="children">
-            {items.map((note) => (
-              <NoteItem
-                key={note.slug}
-                note={note}
-                activeSlug={activeSlug}
-                onSelect={onSelect}
-              />
-            ))}
+  return (
+    <>
+      {visibleTopics.map(([folder, items]) => {
+        const isOpen = openFolders[folder] ?? true;
+
+        return (
+          <div key={folder} className="group">
+            <div className="folder-row">
+              <button
+                className="folder"
+                onClick={() => onToggleFolder(folder)}
+                aria-expanded={isOpen}
+              >
+                <span className={`chevron ${isOpen ? "open" : ""}`}>▶</span>
+                <span className="folder-name">{prettyFolder(folder)}</span>
+                <span className="count">{items.length}</span>
+              </button>
+              <button
+                className="folder-action"
+                type="button"
+                title={`Hide ${prettyFolder(folder)}`}
+                aria-label={`Hide ${prettyFolder(folder)}`}
+                onClick={() => onToggleHiddenFolder(folder)}
+              >
+                Hide
+              </button>
+            </div>
+            {isOpen && (
+              <div className="children">
+                {items.map((note) => (
+                  <NoteItem
+                    key={note.slug}
+                    note={note}
+                    activeSlug={activeSlug}
+                    onSelect={onSelect}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    );
-  });
+        );
+      })}
+      {hiddenTopics.length > 0 && (
+        <section className="hidden-topics">
+          <button
+            className="hidden-topics-toggle"
+            type="button"
+            onClick={onToggleHiddenTopics}
+            aria-expanded={hiddenTopicsOpen}
+          >
+            <span className={`chevron ${hiddenTopicsOpen ? "open" : ""}`}>
+              ▶
+            </span>
+            <span className="folder-name">Hidden topics</span>
+            <span className="count">{hiddenTopics.length}</span>
+          </button>
+          {hiddenTopicsOpen && (
+            <div className="hidden-topic-list">
+              {hiddenTopics.map(([folder]) => (
+                <div key={folder} className="hidden-topic">
+                  <span className="folder-name">{prettyFolder(folder)}</span>
+                  <button
+                    className="folder-action"
+                    type="button"
+                    title={`Unhide ${prettyFolder(folder)}`}
+                    aria-label={`Unhide ${prettyFolder(folder)}`}
+                    onClick={() => onToggleHiddenFolder(folder)}
+                  >
+                    Unhide
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+    </>
+  );
 }
 
 export default function Sidebar({
   tree,
+  hiddenFolders,
+  hiddenTopicsOpen,
   filtered,
   activeSlug,
   openFolders,
@@ -86,6 +148,8 @@ export default function Sidebar({
   onQueryChange,
   onSelect,
   onToggleFolder,
+  onToggleHiddenFolder,
+  onToggleHiddenTopics,
   onOpenAll,
   onCloseAll,
   onToggleTheme,
@@ -150,11 +214,15 @@ export default function Sidebar({
         <nav className="nav">
           <SidebarNavigation
             tree={tree}
+            hiddenFolders={hiddenFolders}
+            hiddenTopicsOpen={hiddenTopicsOpen}
             filtered={filtered}
             openFolders={openFolders}
             activeSlug={activeSlug}
             onSelect={onSelect}
             onToggleFolder={onToggleFolder}
+            onToggleHiddenFolder={onToggleHiddenFolder}
+            onToggleHiddenTopics={onToggleHiddenTopics}
           />
         </nav>
       )}
