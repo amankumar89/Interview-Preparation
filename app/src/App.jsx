@@ -26,7 +26,7 @@ export default function App() {
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openFolders, setOpenFolders] = useState(() =>
-    Object.fromEntries(Object.keys(tree).map((folder) => [folder, true])),
+    Object.fromEntries(Object.keys(tree).map((folder) => [folder, false])),
   );
 
   const active = allNotes.find((note) => note.slug === activeSlug);
