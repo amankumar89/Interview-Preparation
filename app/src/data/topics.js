@@ -25,6 +25,76 @@ const FOLDER_LABELS = {
   "ai-agentic-development": "AI & Agentic Dev",
 };
 
+export const TOPIC_CATEGORIES = [
+  {
+    id: "frontend",
+    name: "Frontend",
+    mark: "FE",
+    description: "HTML, CSS, JavaScript, TypeScript, React, and Next.js",
+    prefixes: ["01", "02", "03", "04", "05", "06"],
+  },
+  {
+    id: "backend",
+    name: "Backend",
+    mark: "BE",
+    description: "Java, Spring, APIs, messaging, and services",
+    prefixes: ["07", "08", "11", "12", "13", "15", "16", "18", "19"],
+  },
+  {
+    id: "databases",
+    name: "Databases",
+    mark: "DB",
+    description: "SQL, PostgreSQL, JPA, and Redis",
+    prefixes: ["09", "10", "14", "17"],
+  },
+  {
+    id: "devops",
+    name: "DevOps & Cloud",
+    mark: "DC",
+    description: "Git, Docker, AWS, and delivery pipelines",
+    prefixes: ["20", "21", "22", "23"],
+  },
+  {
+    id: "algorithms",
+    name: "DSA & Algorithms",
+    mark: "DS",
+    description: "Data structures and problem-solving patterns",
+    prefixes: ["24", "25"],
+  },
+  {
+    id: "design",
+    name: "Design & Architecture",
+    mark: "DA",
+    description: "Design patterns, LLD, HLD, and system design",
+    prefixes: ["26", "27", "28", "29"],
+  },
+  {
+    id: "ai",
+    name: "AI Engineering",
+    mark: "AI",
+    description: "LLMs, retrieval, agents, and evaluation",
+    prefixes: ["30", "31", "32", "33", "34", "35", "36", "37", "38"],
+  },
+  {
+    id: "interview",
+    name: "Interview Projects",
+    mark: "IP",
+    description: "Project-based interview preparation",
+    prefixes: ["39"],
+  },
+];
+
+const CATEGORY_BY_PREFIX = new Map(
+  TOPIC_CATEGORIES.flatMap((category) =>
+    category.prefixes.map((prefix) => [prefix, category.id]),
+  ),
+);
+
+export function categoryForFolder(folder) {
+  const prefix = folder.match(/^(\d{2})-/)?.[1];
+  return CATEGORY_BY_PREFIX.get(prefix) || "other";
+}
+
 const ACRONYMS = new Set([
   "html",
   "css",

@@ -147,6 +147,7 @@ export default function Sidebar({
   isOpen,
   onQueryChange,
   onSelect,
+  onBrowseCategories,
   onToggleFolder,
   onToggleHiddenFolder,
   onToggleHiddenTopics,
@@ -169,10 +170,15 @@ export default function Sidebar({
     <aside className={sidebarClasses}>
       <div className="sidebar-header">
         {!railHidden && (
-          <span className="brand">
+          <button
+            className="brand brand-home-link"
+            type="button"
+            title="Learning paths"
+            onClick={onBrowseCategories}
+          >
             <span className="brand-mark">IP</span>
             <span className="brand-name">Interview Prep</span>
-          </span>
+          </button>
         )}
         <button
           className="icon-btn"
