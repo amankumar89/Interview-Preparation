@@ -13,12 +13,19 @@ const modules = import.meta.glob("../../topics/**/*.md", {
   eager: true,
 });
 
+const LAST_VISITED_NOTE_KEY = "app-last-visited-note";
+
 export default function App() {
   const tree = useMemo(() => buildTree(modules), []);
   const allNotes = useMemo(() => flattenNotes(tree), [tree]);
   const isMobile = useIsMobile();
+  const initialNote =
+    allNotes.find(
+      (note) =>
+        note.slug === window.localStorage.getItem(LAST_VISITED_NOTE_KEY),
+    ) || allNotes[0];
 
-  const [activeSlug, setActiveSlug] = useState(allNotes[0]?.slug);
+  const [activeSlug, setActiveSlug] = useState(initialNote?.slug);
   const [query, setQuery] = useState("");
   const [theme, setTheme] = useState(
     () => window.localStorage.getItem("app-theme") || "light",
@@ -26,7 +33,12 @@ export default function App() {
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openFolders, setOpenFolders] = useState(() =>
-    Object.fromEntries(Object.keys(tree).map((folder) => [folder, false])),
+    Object.fromEntries(
+      Object.keys(tree).map((folder) => [
+        folder,
+        folder === initialNote?.folder,
+      ]),
+    ),
   );
 
   const active = allNotes.find((note) => note.slug === activeSlug);
@@ -42,6 +54,12 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem("app-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (activeSlug) {
+      window.localStorage.setItem(LAST_VISITED_NOTE_KEY, activeSlug);
+    }
+  }, [activeSlug]);
 
   useEffect(() => {
     if (!isMobile) return;
