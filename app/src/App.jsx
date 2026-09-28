@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
 
-const modules = import.meta.glob("../../notes/**/*.md", {
+const modules = import.meta.glob("../../topics/**/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -97,7 +97,7 @@ function prettyNote(name) {
 function buildTree(mods) {
   const tree = {};
   for (const [filePath, content] of Object.entries(mods)) {
-    const parts = filePath.replace("../../notes/", "").split("/");
+    const parts = filePath.replace("../../topics/", "").split("/");
     const fileName = parts.pop();
     const folder = parts.join("/") || "root";
     const name = fileName.replace(/\.md$/, "");

@@ -63,7 +63,7 @@ Topic/
 Example:
 
 ```text
-05-React.js/
+topics/05-React.js/
 └── 05-Hooks.md
 ```
 
@@ -104,7 +104,7 @@ Complete this subtopic.
 For an existing file:
 
 ```text
-Read 05-React.js/05-Hooks.md.
+Read topics/05-React.js/05-Hooks.md.
 
 Add all important interview questions that are missing.
 Do not duplicate existing questions.
