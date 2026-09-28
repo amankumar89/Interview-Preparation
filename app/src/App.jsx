@@ -141,6 +141,14 @@ export default function App() {
 
   const [activeSlug, setActiveSlug] = useState(allNotes[0]?.slug);
   const [query, setQuery] = useState("");
+  const [theme, setTheme] = useState(
+    () => window.localStorage.getItem("app-theme") || "light",
+  );
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("app-theme", theme);
+  }, [theme]);
 
   // Desktop: collapse sidebar to rail
   const [railCollapsed, setRailCollapsed] = useState(false);
@@ -328,6 +336,27 @@ export default function App() {
             )}
           </nav>
         )}
+
+        <div className="sidebar-footer">
+          <button
+            className="theme-toggle"
+            type="button"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            aria-pressed={theme === "dark"}
+            onClick={() =>
+              setTheme((current) => (current === "dark" ? "light" : "dark"))
+            }
+          >
+            <span className="theme-icon" aria-hidden="true">
+              {theme === "dark" ? "☀" : "☾"}
+            </span>
+            {!railHidden && (
+              <span className="theme-label">
+                {theme === "dark" ? "Light theme" : "Dark theme"}
+              </span>
+            )}
+          </button>
+        </div>
       </aside>
 
       {/* ---- Content ---- */}
