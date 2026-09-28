@@ -41,3 +41,19 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q7. What consistency tradeoffs exist between posting and feed visibility?**
 
 **Answer:** Asynchronous fan-out may make a post appear in followers' feeds after a delay, while synchronous distribution increases publish latency and load. Specify freshness expectations and provide read paths that can include a user's own recent posts when necessary.
+
+**Q8. How should a feed handle duplicate entries during fan-out retries?**
+
+**Answer:** Use a stable post and recipient identity as a uniqueness key in the feed store, and make fan-out consumers idempotent. Track processing progress so retries can safely resume without inserting duplicate feed items.
+
+**Q9. How can feed generation stay within a latency budget for users following many accounts?**
+
+**Answer:** Bound candidate fan-in, fetch sources in parallel with deadlines, use precomputed candidate lists where practical, and rank a limited set. Cache carefully and return a usable partial result when optional sources time out, while recording degradation for monitoring.
+
+**Q10. How should a feed respond when a user unfollows an account?**
+
+**Answer:** Enforce the new relationship during feed reads or invalidate affected cached and materialized entries asynchronously. Read-time authorization prevents stale fan-out from exposing content, while cleanup limits storage and avoids showing old items after propagation.
+
+**Q11. A celebrity post creates a large fan-out backlog. What controls can keep the system stable?**
+
+**Answer:** Route high-follower authors through read-time or hybrid fan-out, cap per-author fan-out concurrency, and prioritize active users or recent content. Monitor queue age and publish-to-feed delay, and avoid allowing one author to monopolize shared workers.

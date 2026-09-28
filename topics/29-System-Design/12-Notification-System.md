@@ -41,3 +41,19 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q7. How should notification preferences interact with mandatory security alerts?**
 
 **Answer:** Define policy by notification category rather than treating all messages identically. Respect opt-outs where required, but keep legally or security-critical communication governed by explicit product and compliance rules with clear user expectations.
+
+**Q8. How should notification priority affect queue processing?**
+
+**Answer:** Separate or prioritize urgent work so a large backlog of low-priority messages cannot block critical alerts. Set fairness limits to prevent starvation, and define whether expired notifications should be dropped rather than delivered after they are no longer useful.
+
+**Q9. What does “at-least-once” delivery mean for notification workers?**
+
+**Answer:** A message may be processed more than once because a worker can fail after sending but before acknowledging the queue item. Use stable notification IDs and idempotent state transitions, while recognizing that a third-party provider may still deliver duplicates if it lacks idempotency support.
+
+**Q10. How can the system avoid overwhelming a provider during recovery?**
+
+**Answer:** Apply per-provider concurrency and rate limits, exponential backoff with jitter, and gradual queue draining. Monitor queue age and provider health, and support pause or circuit-breaker controls so a recovering provider is not hit by the entire backlog at once.
+
+**Q11. A notification is queued before a user unsubscribes, then delivered afterward. How should this be handled?**
+
+**Answer:** Recheck current consent or suppression policy as close to dispatch as practical, not only when enqueueing. Persist the policy decision for audit, cancel queued work when required, and define how legal retention and delivery requirements interact with preference changes.

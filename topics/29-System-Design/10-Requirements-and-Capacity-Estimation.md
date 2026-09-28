@@ -41,3 +41,19 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q7. What is a useful way to structure a system-design interview answer?**
 
 **Answer:** Clarify requirements, estimate scale, define APIs and data, sketch a baseline architecture, then analyze bottlenecks and failure modes. Evolve the design only to meet stated needs and summarize tradeoffs and operational concerns.
+
+**Q8. How do you estimate peak requests per second from daily active users?**
+
+**Answer:** Estimate the fraction of users active in the busiest interval and the requests each active user generates, then divide by the interval duration. Cross-check with average daily traffic and an explicit peak-to-average factor; state assumptions because request shape matters more than a precise-looking result.
+
+**Q9. How do you estimate bandwidth and storage for a media-heavy system?**
+
+**Answer:** Multiply request or upload rate by average payload size for bandwidth, and multiply retained objects by their stored size for raw capacity. Then account separately for metadata, replicas, indexes, compression, retention, and derived variants such as thumbnails.
+
+**Q10. How should capacity estimates account for growth and headroom?**
+
+**Answer:** Project expected growth over a stated planning horizon and reserve capacity for peaks, failures, and maintenance. Headroom is not a substitute for load testing; validate assumptions with production measurements and revisit estimates as workload mix changes.
+
+**Q11. An estimate shows one database node can handle average traffic. Is that enough to choose a single-node design?**
+
+**Answer:** No. Check peak load, storage growth, failover requirements, maintenance windows, hot partitions, and recovery objectives. Average throughput alone does not capture tail latency or the capacity needed after a node or zone fails.

@@ -41,3 +41,19 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q7. What are key security and abuse controls for chat?**
 
 **Answer:** Enforce conversation membership on every read and write, rate-limit sends, validate attachments, and provide blocking and reporting controls. Protect stored content and connection tokens, and define retention and deletion behavior.
+
+**Q8. How should a chat system handle duplicate or out-of-order message events?**
+
+**Answer:** Give each client send a stable message ID and each conversation message an authoritative sequence or version. Deduplicate by message ID, order messages by the conversation sequence, and let clients reconcile optimistic messages with the persisted server result.
+
+**Q9. How can group chat fan-out be scaled?**
+
+**Answer:** Persist a message once, then distribute delivery events to active members through a broker or routing layer. For very large groups, avoid synchronous per-member work on the send request; batch fan-out, apply backpressure, and fetch durable history on reconnect.
+
+**Q10. What privacy risks arise from presence and read receipts?**
+
+**Answer:** These signals can reveal user activity and relationships. Make them configurable where appropriate, limit who can observe them, minimize retention, and avoid treating presence as proof that a user received or read a particular message.
+
+**Q11. A user sees a sent message on one device but not another. How would you debug it?**
+
+**Answer:** Trace the message ID through persistence, conversation sequence assignment, event publication, device connection routing, and client cursor state. Check authorization and synchronization watermarks, then make reconnect catch-up idempotent so a missed live event is recovered from durable history.
