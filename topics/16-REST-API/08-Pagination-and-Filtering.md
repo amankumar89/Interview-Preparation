@@ -37,3 +37,7 @@ See AGENTS.md and .agentic/MASTER_PROMPT.md.
 **Q6. How should an API handle arbitrary filtering and sorting parameters?**
 
 **Answer:** Define an explicit set of supported fields and operators, validate types and limits, and parameterize database values. Do not interpolate client-provided field names or expressions directly into SQL.
+
+**Q7. How should pagination behave when records are added or deleted during traversal?**
+
+**Answer:** Prefer cursor pagination over a stable, unique ordering, such as `(created_at, id)`, so changes before the cursor do not shift later pages. Document whether the API offers a snapshot guarantee, and avoid promising an exact total count when the collection is changing.
