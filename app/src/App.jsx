@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
+import ConfirmDialog from "./components/ConfirmDialog";
+import LearningPathHome from "./components/LearningPathHome";
 import MobileTopbar from "./components/MobileTopbar";
 import NoteContent from "./components/NoteContent";
 import Sidebar from "./components/Sidebar";
@@ -8,8 +10,6 @@ import {
   buildTree,
   categoryForFolder,
   flattenNotes,
-  prettyFolder,
-  prettyNote,
   TOPIC_CATEGORIES,
 } from "./data/topics";
 import useIsMobile from "./hooks/useIsMobile";
@@ -23,140 +23,6 @@ const modules = import.meta.glob("../../topics/**/*.md", {
 const LAST_VISITED_NOTE_KEY = "app-last-visited-note";
 const HIDDEN_FOLDERS_KEY = "app-hidden-folders";
 const SELECTED_CATEGORIES_KEY = "app-selected-categories";
-
-function CategoryHome({
-  categories,
-  noteCount,
-  resumeNote,
-  selectedIds,
-  onToggleCategory,
-  onStartLearning,
-  onResume,
-  onBrowseCategories,
-  theme,
-  onToggleTheme,
-}) {
-  return (
-    <main className="category-home">
-      <div className="category-home-inner">
-        <header className="category-home-header">
-          <button
-            className="category-home-brand"
-            type="button"
-            onClick={onBrowseCategories}
-            aria-label="Interview Prep learning paths"
-          >
-            <span className="brand-mark">IP</span>
-            <span>Interview Prep</span>
-          </button>
-          <button
-            className="theme-toggle category-home-theme"
-            type="button"
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-            aria-pressed={theme === "dark"}
-            onClick={onToggleTheme}
-          >
-            <span className="theme-icon" aria-hidden="true">
-              {theme === "dark" ? "☀" : "☾"}
-            </span>
-            <span className="theme-label">
-              {theme === "dark" ? "Light theme" : "Dark theme"}
-            </span>
-          </button>
-        </header>
-
-        <section className="category-home-intro">
-          <p className="category-eyebrow">A study path built around you</p>
-          <h1>What are you preparing for?</h1>
-          <p className="category-home-summary">
-            Select one or more subjects, then start learning from a focused
-            collection of notes.
-          </p>
-          <p className="category-home-count">
-            {categories.length} learning paths <span>·</span> {noteCount} notes
-          </p>
-        </section>
-
-        {resumeNote && (
-          <button
-            className="category-card category-card-resume"
-            type="button"
-            onClick={onResume}
-          >
-            <span className="category-mark">↗</span>
-            <span className="category-card-copy">
-              <span className="category-card-title">Resume learning</span>
-              <span className="category-card-description">
-                {prettyFolder(resumeNote.folder)} ·{" "}
-                {prettyNote(resumeNote.name)}
-              </span>
-            </span>
-            <span className="category-card-count">Continue</span>
-          </button>
-        )}
-
-        <section className="category-grid" aria-label="Learning categories">
-          <button
-            className={`category-card category-card-all ${selectedIds.includes("all") ? "selected" : ""}`}
-            type="button"
-            aria-pressed={selectedIds.includes("all")}
-            onClick={() => onToggleCategory("all")}
-          >
-            <span className="category-mark">ALL</span>
-            <span className="category-card-copy">
-              <span className="category-card-title">All topics</span>
-              <span className="category-card-description">
-                Browse the complete interview preparation library
-              </span>
-            </span>
-            <span className="category-card-count">{noteCount} notes</span>
-          </button>
-          {categories.map((category) => (
-            <button
-              className={`category-card category-tone-${category.id} ${selectedIds.includes(category.id) ? "selected" : ""}`}
-              type="button"
-              aria-pressed={selectedIds.includes(category.id)}
-              key={category.id}
-              onClick={() => onToggleCategory(category.id)}
-            >
-              <span className="category-mark">{category.mark}</span>
-              <span className="category-card-copy">
-                <span className="category-card-title">{category.name}</span>
-                <span className="category-card-description">
-                  {category.description}
-                </span>
-              </span>
-              <span className="category-card-count">
-                {category.noteCount} notes
-              </span>
-            </button>
-          ))}
-        </section>
-        <div className="category-home-actions">
-          <span>
-            {selectedIds.length === 0
-              ? "Select a learning path to continue"
-              : selectedIds.includes("all")
-                ? "All topics selected"
-                : `${selectedIds.length} learning path${selectedIds.length === 1 ? "" : "s"} selected`}
-          </span>
-          <button
-            className="start-learning-button"
-            type="button"
-            disabled={selectedIds.length === 0}
-            onClick={onStartLearning}
-          >
-            Start learning <span aria-hidden="true">→</span>
-          </button>
-        </div>
-        <footer className="category-home-footer">
-          <span>{noteCount} focused notes, organized by subject</span>
-          <span>Pick a path to begin</span>
-        </footer>
-      </div>
-    </main>
-  );
-}
 
 export default function App() {
   const tree = useMemo(() => buildTree(modules), []);
@@ -179,14 +45,16 @@ export default function App() {
     [tree],
   );
   const isMobile = useIsMobile();
-  const resumeNote = allNotes.find(
-    (note) => note.slug === window.localStorage.getItem(LAST_VISITED_NOTE_KEY),
+  const [resumeSlug, setResumeSlug] = useState(() =>
+    window.localStorage.getItem(LAST_VISITED_NOTE_KEY),
   );
+  const resumeNote = allNotes.find((note) => note.slug === resumeSlug);
   const initialNote = resumeNote || allNotes[0];
 
   const [activeSlug, setActiveSlug] = useState(initialNote?.slug);
   const [query, setQuery] = useState("");
   const [isCategoryHome, setIsCategoryHome] = useState(true);
+  const [confirmAction, setConfirmAction] = useState(null);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState(() => {
     try {
       const saved = JSON.parse(
@@ -271,12 +139,6 @@ export default function App() {
   }, [selectedCategoryIds]);
 
   useEffect(() => {
-    if (active) {
-      window.localStorage.setItem(LAST_VISITED_NOTE_KEY, active.slug);
-    }
-  }, [active]);
-
-  useEffect(() => {
     if (!isMobile) return;
     const onKeyDown = (event) => {
       if (event.key === "Escape") setDrawerOpen(false);
@@ -287,6 +149,8 @@ export default function App() {
 
   const selectNote = (slug) => {
     setActiveSlug(slug);
+    setResumeSlug(slug);
+    window.localStorage.setItem(LAST_VISITED_NOTE_KEY, slug);
     if (isMobile) setDrawerOpen(false);
   };
 
@@ -301,19 +165,21 @@ export default function App() {
         );
     const nextNotes = flattenNotes(nextTree);
     setSelectedCategoryIds(nextIds);
-    setActiveSlug(
+    const nextActiveSlug =
       nextNotes.find((note) => note.slug === preferredSlug)?.slug ||
-        nextNotes[0]?.slug,
-    );
+      nextNotes[0]?.slug;
+    setActiveSlug(nextActiveSlug);
+    setResumeSlug(nextActiveSlug || null);
+    if (nextActiveSlug) {
+      window.localStorage.setItem(LAST_VISITED_NOTE_KEY, nextActiveSlug);
+    }
     setQuery("");
     setIsCategoryHome(false);
   };
 
   const toggleCategory = (categoryId) => {
     if (categoryId === "all") {
-      setSelectedCategoryIds((current) =>
-        current.includes("all") ? [] : ["all"],
-      );
+      openCategorySelection(["all"]);
       return;
     }
     const currentIds = selectedCategoryIds.includes("all")
@@ -334,6 +200,25 @@ export default function App() {
     );
   };
 
+  const confirmCurrentAction = () => {
+    if (confirmAction === "leave") {
+      setIsCategoryHome(true);
+      setDrawerOpen(false);
+    } else if (confirmAction === "clear") {
+      window.localStorage.removeItem(LAST_VISITED_NOTE_KEY);
+      window.localStorage.removeItem(SELECTED_CATEGORIES_KEY);
+      setResumeSlug(null);
+      setActiveSlug(undefined);
+      setSelectedCategoryIds([]);
+      setQuery("");
+      setIsCategoryHome(true);
+      setDrawerOpen(false);
+    }
+    setConfirmAction(null);
+  };
+
+  const canClearLearning = Boolean(resumeNote || selectedCategoryIds.length);
+
   const setAllFolders = (isOpen) =>
     setOpenFolders(
       Object.fromEntries(Object.keys(tree).map((folder) => [folder, isOpen])),
@@ -342,15 +227,16 @@ export default function App() {
   return (
     <div className={`app ${isMobile ? "is-mobile" : "is-desktop"}`}>
       {isCategoryHome ? (
-        <CategoryHome
+        <LearningPathHome
           categories={categories}
           noteCount={allNotes.length}
           resumeNote={resumeNote}
           selectedIds={selectedCategoryIds}
+          canClearLearning={canClearLearning}
           onToggleCategory={toggleCategory}
           onStartLearning={() => openCategorySelection(selectedCategoryIds)}
           onResume={resumeLearning}
-          onBrowseCategories={() => setIsCategoryHome(true)}
+          onRequestClear={() => setConfirmAction("clear")}
           theme={theme}
           onToggleTheme={() =>
             setTheme((current) => (current === "dark" ? "light" : "dark"))
@@ -373,15 +259,14 @@ export default function App() {
             openFolders={openFolders}
             query={query}
             theme={theme}
+            canClearLearning={canClearLearning}
             isMobile={isMobile}
             isCollapsed={railCollapsed}
             isOpen={drawerOpen}
             onQueryChange={setQuery}
             onSelect={selectNote}
-            onBrowseCategories={() => {
-              setIsCategoryHome(true);
-              setDrawerOpen(false);
-            }}
+            onBrowseCategories={() => setConfirmAction("leave")}
+            onRequestClearLearning={() => setConfirmAction("clear")}
             onToggleHiddenFolder={(folder) =>
               setHiddenFolders((previous) =>
                 previous.includes(folder)
@@ -411,6 +296,24 @@ export default function App() {
             <NoteContent note={active} />
           </main>
         </>
+      )}
+      {confirmAction && (
+        <ConfirmDialog
+          title="Are you sure?"
+          description={
+            confirmAction === "clear"
+              ? "This clears your saved learning path and last visited note. Your notes and other settings will stay untouched."
+              : "Return to learning paths? Your current note will be saved so you can resume later."
+          }
+          confirmLabel={
+            confirmAction === "clear"
+              ? "Clear learning"
+              : "Go to learning paths"
+          }
+          isDestructive={confirmAction === "clear"}
+          onCancel={() => setConfirmAction(null)}
+          onConfirm={confirmCurrentAction}
+        />
       )}
     </div>
   );
