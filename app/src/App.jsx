@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
 import ConfirmDialog from "./components/ConfirmDialog";
@@ -10,6 +10,8 @@ import {
   buildTree,
   categoryForFolder,
   flattenNotes,
+  prettyFolder,
+  prettyNote,
   TOPIC_CATEGORIES,
 } from "./data/topics";
 import useIsMobile from "./hooks/useIsMobile";
@@ -23,6 +25,13 @@ const modules = import.meta.glob("../../topics/**/*.md", {
 const LAST_VISITED_NOTE_KEY = "app-last-visited-note";
 const HIDDEN_FOLDERS_KEY = "app-hidden-folders";
 const SELECTED_CATEGORIES_KEY = "app-selected-categories";
+
+function formatNavigationTitle(note, currentNote) {
+  const subtopicName = prettyNote(note.name);
+  return note.folder === currentNote.folder
+    ? subtopicName
+    : `${prettyFolder(note.folder)} - ${subtopicName}`;
+}
 
 export default function App() {
   const tree = useMemo(() => buildTree(modules), []);
@@ -85,6 +94,7 @@ export default function App() {
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hiddenTopicsOpen, setHiddenTopicsOpen] = useState(false);
+  const contentRef = useRef(null);
   const [openFolders, setOpenFolders] = useState(() =>
     Object.fromEntries(
       Object.keys(tree).map((folder) => [
@@ -108,6 +118,14 @@ export default function App() {
   );
   const active =
     categoryNotes.find((note) => note.slug === activeSlug) || categoryNotes[0];
+  const activeIndex = categoryNotes.findIndex(
+    (note) => note.slug === active?.slug,
+  );
+  const previousNote = activeIndex > 0 ? categoryNotes[activeIndex - 1] : null;
+  const nextNote =
+    activeIndex >= 0 && activeIndex < categoryNotes.length - 1
+      ? categoryNotes[activeIndex + 1]
+      : null;
   const visibleNotes = categoryNotes.filter(
     (note) => !hiddenFolders.includes(note.folder),
   );
@@ -146,6 +164,10 @@ export default function App() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isMobile]);
+
+  useEffect(() => {
+    if (contentRef.current) contentRef.current.scrollTop = 0;
+  }, [active?.slug]);
 
   const selectNote = (slug) => {
     setActiveSlug(slug);
@@ -292,8 +314,39 @@ export default function App() {
                 : setRailCollapsed((value) => !value)
             }
           />
-          <main className="content">
+          <main className="content" ref={contentRef}>
             <NoteContent note={active} />
+            {active && (
+              <nav className="note-navigation" aria-label="Subtopic navigation">
+                <button
+                  className="note-navigation-button note-navigation-previous"
+                  type="button"
+                  disabled={!previousNote}
+                  onClick={() => selectNote(previousNote.slug)}
+                >
+                  <span className="note-navigation-direction">Back</span>
+                  <span className="note-navigation-title">
+                    {previousNote
+                      ? formatNavigationTitle(previousNote, active)
+                      : "Previous subtopic"}
+                  </span>
+                </button>
+                <span className="note-navigation-position">Subtopics</span>
+                <button
+                  className="note-navigation-button note-navigation-next"
+                  type="button"
+                  disabled={!nextNote}
+                  onClick={() => selectNote(nextNote.slug)}
+                >
+                  <span className="note-navigation-direction">Next</span>
+                  <span className="note-navigation-title">
+                    {nextNote
+                      ? formatNavigationTitle(nextNote, active)
+                      : "Next subtopic"}
+                  </span>
+                </button>
+              </nav>
+            )}
           </main>
         </>
       )}
