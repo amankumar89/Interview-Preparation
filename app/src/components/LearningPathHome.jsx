@@ -67,6 +67,22 @@ export default function LearningPathHome({
 
         {view === "domains" ? (
           <section className="category-grid domain-grid" aria-label="Topics">
+            {resumeNote && (
+              <button
+                className="category-card category-card-resume domain-card"
+                type="button"
+                onClick={onResume}
+              >
+                <span className="category-mark">↗</span>
+                <span className="category-card-copy">
+                  <span className="category-card-title">Resume Learnings</span>
+                  <span className="category-card-description">
+                    {`${prettyFolder(resumeNote.folder)} · ${prettyNote(resumeNote.name)}`}
+                  </span>
+                </span>
+                <span className="category-card-count">Continue</span>
+              </button>
+            )}
             <button
               className="category-card category-tone-frontend domain-card"
               type="button"
@@ -94,25 +110,6 @@ export default function LearningPathHome({
                 </span>
               </span>
               <span className="category-card-count">Browse →</span>
-            </button>
-            <button
-              className="category-card category-card-resume domain-card"
-              type="button"
-              disabled={!resumeNote}
-              onClick={onResume}
-            >
-              <span className="category-mark">↗</span>
-              <span className="category-card-copy">
-                <span className="category-card-title">Resume Learnings</span>
-                <span className="category-card-description">
-                  {resumeNote
-                    ? `${prettyFolder(resumeNote.folder)} · ${prettyNote(resumeNote.name)}`
-                    : "Your last opened note will appear here"}
-                </span>
-              </span>
-              <span className="category-card-count">
-                {resumeNote ? "Continue" : "No saved note"}
-              </span>
             </button>
           </section>
         ) : (
