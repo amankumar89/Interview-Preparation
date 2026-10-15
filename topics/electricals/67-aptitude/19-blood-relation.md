@@ -1,6 +1,6 @@
-# APTITUDE_Blood_Relation
+# Blood Relation
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 19
 
 ## Notes

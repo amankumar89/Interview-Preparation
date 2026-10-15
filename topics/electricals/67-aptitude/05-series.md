@@ -1,6 +1,6 @@
-# Aptitude_Series_Corrected
+# Series
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 05
 
 ## Notes

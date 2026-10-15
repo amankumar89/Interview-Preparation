@@ -1,6 +1,6 @@
-# APTITUDE_Simple_Interest
+# Simple Interest
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 04
 
 ## Notes

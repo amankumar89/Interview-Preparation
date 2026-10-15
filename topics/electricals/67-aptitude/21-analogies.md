@@ -1,7 +1,7 @@
-# APTITUDE_Mirror
+# Analogies
 
-- Section: 67. APTITUDE
-- Subtopic: 12
+- Section: 67
+- Subtopic: 21
 
 ## Notes
 

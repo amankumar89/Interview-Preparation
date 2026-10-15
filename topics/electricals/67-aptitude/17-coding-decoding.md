@@ -1,6 +1,6 @@
-# APTITUDE_Coding_Decoding
+# Coding and Decoding
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 17
 
 ## Notes

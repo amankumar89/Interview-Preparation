@@ -1,6 +1,6 @@
-# APTITUDE_Odd_One_Out
+# Odd One Out
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 10
 
 ## Notes

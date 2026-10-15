@@ -1,6 +1,6 @@
-# APTITUDE_Ratio_Proportion
+# Ratio and Proportion
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 06
 
 ## Notes

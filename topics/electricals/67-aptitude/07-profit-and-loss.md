@@ -1,6 +1,6 @@
-# APTITUDE_Profit_and_Loss
+# Profit and Loss
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 07
 
 ## Notes

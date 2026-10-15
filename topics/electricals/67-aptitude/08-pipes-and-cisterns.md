@@ -1,6 +1,6 @@
-# APTITUDE_Pipes_and_Cisterns
+# Pipes and Cisterns
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 08
 
 ## Notes

@@ -1,6 +1,6 @@
-# APTITUDE_Mensuration
+# Mensuration
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 13
 
 ## Notes

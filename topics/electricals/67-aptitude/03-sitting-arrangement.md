@@ -1,6 +1,6 @@
-# Aptitude_Sitting_Arrangement_Corrected
+# Sitting Arrangement
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 03
 
 ## Notes

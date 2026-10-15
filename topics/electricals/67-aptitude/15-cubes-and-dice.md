@@ -1,6 +1,6 @@
-# APTITUDE_Cubes_and_Dice
+# Cubes and Dice
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 15
 
 ## Notes

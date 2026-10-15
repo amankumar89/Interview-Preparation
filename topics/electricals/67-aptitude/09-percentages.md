@@ -1,6 +1,6 @@
-# APTITUDE_Percentages
+# Percentages
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 09
 
 ## Notes

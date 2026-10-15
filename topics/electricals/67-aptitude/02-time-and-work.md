@@ -1,7 +1,7 @@
-# APTITUDE_Average
+# Time and Work
 
-- Section: 67. APTITUDE
-- Subtopic: 20
+- Section: 67
+- Subtopic: 02
 
 ## Notes
 

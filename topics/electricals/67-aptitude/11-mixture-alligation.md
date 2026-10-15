@@ -1,6 +1,6 @@
-# APTITUDE_Mixture_Alligation
+# Mixture and Alligation
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 11
 
 ## Notes

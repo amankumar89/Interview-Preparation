@@ -1,6 +1,6 @@
-# APTITUDE_Time_Speed_and_Distance
+# Time, Speed, and Distance
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 01
 
 ## Notes

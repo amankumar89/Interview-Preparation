@@ -1,7 +1,7 @@
-# APTITUDE_Ages
+# Mirror
 
-- Section: 67. APTITUDE
-- Subtopic: 22
+- Section: 67
+- Subtopic: 12
 
 ## Notes
 

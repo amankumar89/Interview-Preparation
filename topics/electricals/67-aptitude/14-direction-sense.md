@@ -1,6 +1,6 @@
-# APTITUDE_Direction_Sense
+# Direction Sense
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 14
 
 ## Notes

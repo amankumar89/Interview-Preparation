@@ -1,6 +1,6 @@
-# APTITUDE_Compound_Interest
+# Compound Interest
 
-- Section: 67. APTITUDE
+- Section: 67
 - Subtopic: 16
 
 ## Notes
