@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
 import ConfirmDialog from "./components/ConfirmDialog";
@@ -19,7 +20,6 @@ import {
   clearLearning,
   openLearningPath,
   returnToLearningHome,
-  selectNote as selectActiveNote,
   selectLearningState,
   setHomeView as setLearningHomeView,
   toggleHiddenFolder,
@@ -43,19 +43,33 @@ function formatNavigationTitle(note, currentNote) {
     : `${prettyFolder(note.folder)} - ${subtopicName}`;
 }
 
+function pathForNote(slug) {
+  return `/learn/${slug.split("/").map(encodeURIComponent).join("/")}`;
+}
+
 export default function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const {
     activeSlug,
-    homeView,
     hiddenFolders,
-    isCategoryHome,
+    homeView: storedHomeView,
+    isCategoryHome: isStoredCategoryHome,
     resumeSlug,
     selectedCategoryIds,
     theme,
   } = useSelector(selectLearningState);
   const tree = useMemo(() => buildTree(modules), []);
   const allNotes = useMemo(() => flattenNotes(tree), [tree]);
+  const noteRouteSlug = pathname.startsWith("/learn/")
+    ? pathname.slice("/learn/".length)
+    : null;
+  const routeNote = noteRouteSlug
+    ? allNotes.find((note) => note.slug === noteRouteSlug)
+    : null;
+  const isCategoryHome = pathname === "/" || pathname === "/software";
+  const homeView = pathname === "/software" ? "software" : "domains";
   const categories = useMemo(
     () =>
       TOPIC_CATEGORIES.map((category) => {
@@ -75,7 +89,7 @@ export default function App() {
   );
   const isMobile = useIsMobile();
   const resumeNote = allNotes.find((note) => note.slug === resumeSlug);
-  const initialNote = resumeNote || allNotes[0];
+  const initialNote = routeNote || resumeNote || allNotes[0];
   const [query, setQuery] = useState("");
   const [confirmAction, setConfirmAction] = useState(null);
   const [railCollapsed, setRailCollapsed] = useState(false);
@@ -92,19 +106,26 @@ export default function App() {
   );
 
   const categoryTree = useMemo(() => {
-    if (selectedCategoryIds.includes("all")) return tree;
+    const categoryIds = routeNote
+      ? categoryForFolder(routeNote.folder) === "other"
+        ? ["all"]
+        : [categoryForFolder(routeNote.folder)]
+      : selectedCategoryIds;
+    if (categoryIds.includes("all")) return tree;
     return Object.fromEntries(
       Object.entries(tree).filter(([folder]) =>
-        selectedCategoryIds.includes(categoryForFolder(folder)),
+        categoryIds.includes(categoryForFolder(folder)),
       ),
     );
-  }, [selectedCategoryIds, tree]);
+  }, [routeNote, selectedCategoryIds, tree]);
   const categoryNotes = useMemo(
     () => flattenNotes(categoryTree),
     [categoryTree],
   );
   const active =
-    categoryNotes.find((note) => note.slug === activeSlug) || categoryNotes[0];
+    routeNote ||
+    categoryNotes.find((note) => note.slug === activeSlug) ||
+    categoryNotes[0];
   const activeIndex = categoryNotes.findIndex(
     (note) => note.slug === active?.slug,
   );
@@ -123,6 +144,47 @@ export default function App() {
           note.content.toLowerCase().includes(query.toLowerCase()),
       )
     : null;
+
+  useEffect(() => {
+    if (pathname === "/") {
+      if (!isStoredCategoryHome || storedHomeView !== "domains") {
+        dispatch(returnToLearningHome());
+      }
+      return;
+    }
+
+    if (pathname === "/software") {
+      if (!isStoredCategoryHome || storedHomeView !== "software") {
+        dispatch(returnToLearningHome());
+        dispatch(setLearningHomeView("software"));
+      }
+      return;
+    }
+
+    if (!routeNote) return;
+
+    const categoryId = categoryForFolder(routeNote.folder);
+    const categoryIds = categoryId === "other" ? ["all"] : [categoryId];
+    const hasMatchingCategory =
+      categoryIds.length === selectedCategoryIds.length &&
+      categoryIds.every((id, index) => id === selectedCategoryIds[index]);
+
+    if (
+      activeSlug !== routeNote.slug ||
+      isStoredCategoryHome ||
+      !hasMatchingCategory
+    ) {
+      dispatch(openLearningPath({ categoryIds, activeSlug: routeNote.slug }));
+    }
+  }, [
+    activeSlug,
+    dispatch,
+    isStoredCategoryHome,
+    pathname,
+    routeNote,
+    selectedCategoryIds,
+    storedHomeView,
+  ]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -172,7 +234,11 @@ export default function App() {
   }, [active?.slug]);
 
   const selectNote = (slug) => {
-    dispatch(selectActiveNote(slug));
+    const note = allNotes.find((item) => item.slug === slug);
+    if (note) {
+      setOpenFolders((previous) => ({ ...previous, [note.folder]: true }));
+    }
+    navigate(pathForNote(slug));
     if (isMobile) setDrawerOpen(false);
   };
 
@@ -188,10 +254,8 @@ export default function App() {
     const nextNotes = flattenNotes(nextTree);
     const nextActiveNote =
       nextNotes.find((note) => note.slug === preferredSlug) || nextNotes[0];
-    const nextActiveSlug = nextActiveNote?.slug;
-    dispatch(
-      openLearningPath({ categoryIds: nextIds, activeSlug: nextActiveSlug }),
-    );
+    if (nextActiveNote) navigate(pathForNote(nextActiveNote.slug));
+    else navigate("/");
     if (nextActiveNote) {
       setOpenFolders((previous) => ({
         ...previous,
@@ -212,10 +276,11 @@ export default function App() {
 
   const confirmCurrentAction = () => {
     if (confirmAction === "leave") {
-      dispatch(returnToLearningHome());
+      navigate("/");
       setDrawerOpen(false);
     } else if (confirmAction === "clear") {
       dispatch(clearLearning());
+      navigate("/");
       setQuery("");
       setDrawerOpen(false);
     }
@@ -228,6 +293,10 @@ export default function App() {
       Object.fromEntries(Object.keys(tree).map((folder) => [folder, isOpen])),
     );
 
+  if (pathname.startsWith("/learn/") && !routeNote) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className={`app ${isMobile ? "is-mobile" : "is-desktop"}`}>
       {isCategoryHome ? (
@@ -239,12 +308,12 @@ export default function App() {
           noteCount={allNotes.length}
           resumeNote={resumeNote}
           canClearLearning={canClearLearning}
-          onOpenSoftware={() => dispatch(setLearningHomeView("software"))}
+          onOpenSoftware={() => navigate("/software")}
           onOpenElectricals={() => openCategorySelection(["electricals"])}
           onSelectSoftwareCategory={(categoryId) =>
             openCategorySelection([categoryId])
           }
-          onBackHome={() => dispatch(setLearningHomeView("domains"))}
+          onBackHome={() => navigate("/")}
           onResume={resumeLearning}
           onRequestClear={() => setConfirmAction("clear")}
           theme={theme}
