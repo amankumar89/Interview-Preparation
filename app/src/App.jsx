@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "highlight.js/styles/github-dark-dimmed.css";
 import "./App.css";
 import ConfirmDialog from "./components/ConfirmDialog";
@@ -14,6 +15,16 @@ import {
   prettyNote,
   TOPIC_CATEGORIES,
 } from "./data/topics";
+import {
+  clearLearning,
+  openLearningPath,
+  returnToLearningHome,
+  selectNote as selectActiveNote,
+  selectLearningState,
+  setHomeView as setLearningHomeView,
+  toggleHiddenFolder,
+  toggleTheme,
+} from "./features/learning/learningSlice";
 import useIsMobile from "./hooks/useIsMobile";
 
 const modules = import.meta.glob("../../topics/**/*.md", {
@@ -22,7 +33,6 @@ const modules = import.meta.glob("../../topics/**/*.md", {
   eager: true,
 });
 
-const LAST_VISITED_NOTE_KEY = "app-last-visited-note";
 const HIDDEN_FOLDERS_KEY = "app-hidden-folders";
 const SELECTED_CATEGORIES_KEY = "app-selected-categories";
 
@@ -34,6 +44,16 @@ function formatNavigationTitle(note, currentNote) {
 }
 
 export default function App() {
+  const dispatch = useDispatch();
+  const {
+    activeSlug,
+    homeView,
+    hiddenFolders,
+    isCategoryHome,
+    resumeSlug,
+    selectedCategoryIds,
+    theme,
+  } = useSelector(selectLearningState);
   const tree = useMemo(() => buildTree(modules), []);
   const allNotes = useMemo(() => flattenNotes(tree), [tree]);
   const categories = useMemo(
@@ -54,44 +74,10 @@ export default function App() {
     [tree],
   );
   const isMobile = useIsMobile();
-  const [resumeSlug, setResumeSlug] = useState(() =>
-    window.localStorage.getItem(LAST_VISITED_NOTE_KEY),
-  );
   const resumeNote = allNotes.find((note) => note.slug === resumeSlug);
   const initialNote = resumeNote || allNotes[0];
-
-  const [activeSlug, setActiveSlug] = useState(initialNote?.slug);
   const [query, setQuery] = useState("");
-  const [isCategoryHome, setIsCategoryHome] = useState(true);
-  const [homeView, setHomeView] = useState("domains");
   const [confirmAction, setConfirmAction] = useState(null);
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState(() => {
-    try {
-      const saved = JSON.parse(
-        window.localStorage.getItem(SELECTED_CATEGORIES_KEY),
-      );
-      if (!Array.isArray(saved)) return [];
-      if (saved.includes("all")) return ["all"];
-      return [...new Set(saved)].filter((id) =>
-        TOPIC_CATEGORIES.some((category) => category.id === id),
-      );
-    } catch {
-      return [];
-    }
-  });
-  const [hiddenFolders, setHiddenFolders] = useState(() => {
-    try {
-      const saved = JSON.parse(window.localStorage.getItem(HIDDEN_FOLDERS_KEY));
-      return Array.isArray(saved)
-        ? saved.filter((folder) => Object.hasOwn(tree, folder))
-        : [];
-    } catch {
-      return [];
-    }
-  });
-  const [theme, setTheme] = useState(
-    () => window.localStorage.getItem("app-theme") || "light",
-  );
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hiddenTopicsOpen, setHiddenTopicsOpen] = useState(false);
@@ -144,18 +130,33 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    const validHiddenFolders = hiddenFolders.filter((folder) =>
+      Object.hasOwn(tree, folder),
+    );
     window.localStorage.setItem(
       HIDDEN_FOLDERS_KEY,
-      JSON.stringify(hiddenFolders),
+      JSON.stringify(validHiddenFolders),
     );
-  }, [hiddenFolders]);
+  }, [hiddenFolders, tree]);
 
   useEffect(() => {
-    window.localStorage.setItem(
-      SELECTED_CATEGORIES_KEY,
-      JSON.stringify(selectedCategoryIds),
-    );
+    if (selectedCategoryIds.length) {
+      window.localStorage.setItem(
+        SELECTED_CATEGORIES_KEY,
+        JSON.stringify(selectedCategoryIds),
+      );
+    } else {
+      window.localStorage.removeItem(SELECTED_CATEGORIES_KEY);
+    }
   }, [selectedCategoryIds]);
+
+  useEffect(() => {
+    if (resumeSlug) {
+      window.localStorage.setItem("app-last-visited-note", resumeSlug);
+    } else {
+      window.localStorage.removeItem("app-last-visited-note");
+    }
+  }, [resumeSlug]);
 
   useEffect(() => {
     if (!isMobile) return;
@@ -171,9 +172,7 @@ export default function App() {
   }, [active?.slug]);
 
   const selectNote = (slug) => {
-    setActiveSlug(slug);
-    setResumeSlug(slug);
-    window.localStorage.setItem(LAST_VISITED_NOTE_KEY, slug);
+    dispatch(selectActiveNote(slug));
     if (isMobile) setDrawerOpen(false);
   };
 
@@ -187,23 +186,19 @@ export default function App() {
           ),
         );
     const nextNotes = flattenNotes(nextTree);
-    setSelectedCategoryIds(nextIds);
     const nextActiveNote =
       nextNotes.find((note) => note.slug === preferredSlug) || nextNotes[0];
     const nextActiveSlug = nextActiveNote?.slug;
-    setActiveSlug(nextActiveSlug);
+    dispatch(
+      openLearningPath({ categoryIds: nextIds, activeSlug: nextActiveSlug }),
+    );
     if (nextActiveNote) {
       setOpenFolders((previous) => ({
         ...previous,
         [nextActiveNote.folder]: true,
       }));
     }
-    setResumeSlug(nextActiveSlug || null);
-    if (nextActiveSlug) {
-      window.localStorage.setItem(LAST_VISITED_NOTE_KEY, nextActiveSlug);
-    }
     setQuery("");
-    setIsCategoryHome(false);
   };
 
   const resumeLearning = () => {
@@ -217,25 +212,17 @@ export default function App() {
 
   const confirmCurrentAction = () => {
     if (confirmAction === "leave") {
-      setIsCategoryHome(true);
-      setHomeView("domains");
+      dispatch(returnToLearningHome());
       setDrawerOpen(false);
     } else if (confirmAction === "clear") {
-      window.localStorage.removeItem(LAST_VISITED_NOTE_KEY);
-      window.localStorage.removeItem(SELECTED_CATEGORIES_KEY);
-      setResumeSlug(null);
-      setActiveSlug(undefined);
-      setSelectedCategoryIds([]);
+      dispatch(clearLearning());
       setQuery("");
-      setIsCategoryHome(true);
-      setHomeView("domains");
       setDrawerOpen(false);
     }
     setConfirmAction(null);
   };
 
   const canClearLearning = Boolean(resumeNote || selectedCategoryIds.length);
-
   const setAllFolders = (isOpen) =>
     setOpenFolders(
       Object.fromEntries(Object.keys(tree).map((folder) => [folder, isOpen])),
@@ -252,18 +239,16 @@ export default function App() {
           noteCount={allNotes.length}
           resumeNote={resumeNote}
           canClearLearning={canClearLearning}
-          onOpenSoftware={() => setHomeView("software")}
+          onOpenSoftware={() => dispatch(setLearningHomeView("software"))}
           onOpenElectricals={() => openCategorySelection(["electricals"])}
           onSelectSoftwareCategory={(categoryId) =>
             openCategorySelection([categoryId])
           }
-          onBackHome={() => setHomeView("domains")}
+          onBackHome={() => dispatch(setLearningHomeView("domains"))}
           onResume={resumeLearning}
           onRequestClear={() => setConfirmAction("clear")}
           theme={theme}
-          onToggleTheme={() =>
-            setTheme((current) => (current === "dark" ? "light" : "dark"))
-          }
+          onToggleTheme={() => dispatch(toggleTheme())}
         />
       ) : (
         <>
@@ -291,11 +276,7 @@ export default function App() {
             onBrowseCategories={() => setConfirmAction("leave")}
             onRequestClearLearning={() => setConfirmAction("clear")}
             onToggleHiddenFolder={(folder) =>
-              setHiddenFolders((previous) =>
-                previous.includes(folder)
-                  ? previous.filter((hiddenFolder) => hiddenFolder !== folder)
-                  : [...previous, folder],
-              )
+              dispatch(toggleHiddenFolder(folder))
             }
             onToggleHiddenTopics={() => setHiddenTopicsOpen((open) => !open)}
             onToggleFolder={(folder) =>
@@ -306,9 +287,7 @@ export default function App() {
             }
             onOpenAll={() => setAllFolders(true)}
             onCloseAll={() => setAllFolders(false)}
-            onToggleTheme={() =>
-              setTheme((current) => (current === "dark" ? "light" : "dark"))
-            }
+            onToggleTheme={() => dispatch(toggleTheme())}
             onToggleSidebar={() =>
               isMobile
                 ? setDrawerOpen(false)
