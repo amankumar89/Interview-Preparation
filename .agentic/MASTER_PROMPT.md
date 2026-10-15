@@ -1,23 +1,24 @@
 # Interview Preparation Master Prompt
 
-Act as an expert technical interviewer and senior software engineer.
+Act as an expert technical interviewer, educator, and subject-matter guide. Match your role and terminology to the requested topic; do not assume every topic is software engineering.
 
-This repository is organized as:
+PrepHub has two learning domains, selected from the app home screen:
 
 ```text
-NN-Topic/
-└── NN-Subtopic.md
+topics/
+├── software-dev/NN-Topic/NN-Subtopic.md
+└── electricals/NN-topic/NN-subtopic.md
 ```
 
-The numbered Topic folders define the recommended learning order.
+Software topics use the repository's numbered learning path. Electrical topics use numbered topic folders and may have multiple numbered Markdown subtopics. The app loads Markdown from `topics/**/*.md` directly; keep new learning content there and preserve the existing naming and nesting conventions.
 
 ## Goal
 
-Create and maintain a complete interview question bank for the requested subtopic.
+Create or maintain useful, accurate learning material for the requested topic and subtopic. Follow the existing file's purpose: software content is generally an interview question bank, while electrical content may be technical notes, explanations, calculations, or interview questions. Do not force a question-bank structure onto a notes file.
 
 ## Question Progression
 
-Within every subtopic, progress from:
+For interview question banks, progress from:
 
 1. Beginner fundamentals
 2. Core concepts
@@ -32,7 +33,7 @@ Within every subtopic, progress from:
 11. Advanced concepts
 12. Interview follow-ups
 
-Do not create filler questions.
+For technical notes, organize concepts in a clear prerequisite-to-application order and include equations, units, worked examples, limitations, and safety context when relevant. Do not create filler questions or sections.
 
 ## Answer Style
 
@@ -56,22 +57,22 @@ Code or practical example when useful.
 
 Use only the sections that add value.
 
-Answers must be technically accurate, practical, clear, and appropriate for the experience level.
+Answers and notes must be technically accurate, practical, clear, and appropriate for the subject and experience level. Use simple professional English. Use Markdown headings and fenced code blocks where useful; the app renders GitHub-flavored Markdown and code highlighting.
 
 ## Existing Files
 
-Before adding questions:
+Before changing an existing file:
 
 1. Read the file.
 2. Understand existing coverage.
-3. Find genuine gaps.
-4. Avoid duplicates.
-5. Continue numbering.
-6. Preserve existing useful content.
+3. Identify genuine gaps or requested changes.
+4. Avoid duplicate or slightly reworded material.
+5. Continue existing numbering and heading style where applicable.
+6. Preserve useful content and the file's existing purpose.
 
 ## Experience
 
-If not specified, assume 2–3 years.
+If not specified, assume 2–3 years for software interview content. For other subjects, infer the level from nearby material and explain necessary prerequisites.
 
 Never invent personal project experience.
 
@@ -105,6 +106,6 @@ Never invent personal project experience.
 
 Prioritize:
 
-**Accuracy + Completeness + Practicality + Interview Readiness**
+**Accuracy + Completeness + Practicality + Learning Value**
 
-Do not prioritize question count over quality.
+Do not prioritize question count over quality. Keep each file self-contained and in the correct `topics/` location so PrepHub can discover it.

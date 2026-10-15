@@ -1,5 +1,11 @@
 # [Topic] — [Subtopic]
 
+Use the structure that matches the file: an interview question bank, a technical-notes file, or a blend. Remove unused sections and continue existing numbering when editing an existing file.
+
+## Overview
+
+[Briefly define the subtopic and its place in the larger topic.]
+
 ## Fundamentals
 
 ### Q1. [Question]
@@ -107,3 +113,27 @@ Code
 
 1. [Question] → [Short answer]
 2. [Question] → [Short answer]
+
+## Technical Notes Alternative
+
+For a notes-focused file, use relevant headings such as:
+
+```markdown
+# [Topic] — [Subtopic]
+
+## Overview
+
+## Key Concepts
+
+## Equations and Units
+
+## Worked Example
+
+## Applications and Limitations
+
+## Safety Considerations
+
+## Quick Revision
+```
+
+Omit headings that do not apply. Include units and assumptions with calculations, and keep safety considerations specific to the topic.
