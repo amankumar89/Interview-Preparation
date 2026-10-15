@@ -82,6 +82,13 @@ export const TOPIC_CATEGORIES = [
     description: "Project-based interview preparation",
     prefixes: ["39"],
   },
+  {
+    id: "electricals",
+    name: "Electricals",
+    mark: "EL",
+    description: "Electrical fundamentals, equipment, and systems",
+    prefixes: [],
+  },
 ];
 
 const CATEGORY_BY_PREFIX = new Map(
@@ -91,7 +98,11 @@ const CATEGORY_BY_PREFIX = new Map(
 );
 
 export function categoryForFolder(folder) {
-  const prefix = folder.match(/^(\d{2})-/)?.[1];
+  const [domain, ...topicParts] = folder.split("/");
+  if (domain === "electricals") return "electricals";
+
+  const topicFolder = topicParts.at(-1) || domain;
+  const prefix = topicFolder.match(/^(\d{2})-/)?.[1];
   return CATEGORY_BY_PREFIX.get(prefix) || "other";
 }
 
@@ -133,8 +144,9 @@ function titleCaseFallback(slug) {
 }
 
 export function prettyFolder(folder) {
-  const match = folder.match(/^(\d+)-(.+)$/);
-  const slug = match ? match[2] : folder;
+  const topicFolder = folder.split("/").at(-1);
+  const match = topicFolder.match(/^(\d+)-(.+)$/);
+  const slug = match ? match[2] : topicFolder;
   return FOLDER_LABELS[slug] || titleCaseFallback(slug);
 }
 
