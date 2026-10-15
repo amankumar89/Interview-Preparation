@@ -63,6 +63,7 @@ export default function App() {
   const [activeSlug, setActiveSlug] = useState(initialNote?.slug);
   const [query, setQuery] = useState("");
   const [isCategoryHome, setIsCategoryHome] = useState(true);
+  const [homeView, setHomeView] = useState("domains");
   const [confirmAction, setConfirmAction] = useState(null);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState(() => {
     try {
@@ -187,30 +188,22 @@ export default function App() {
         );
     const nextNotes = flattenNotes(nextTree);
     setSelectedCategoryIds(nextIds);
-    const nextActiveSlug =
-      nextNotes.find((note) => note.slug === preferredSlug)?.slug ||
-      nextNotes[0]?.slug;
+    const nextActiveNote =
+      nextNotes.find((note) => note.slug === preferredSlug) || nextNotes[0];
+    const nextActiveSlug = nextActiveNote?.slug;
     setActiveSlug(nextActiveSlug);
+    if (nextActiveNote) {
+      setOpenFolders((previous) => ({
+        ...previous,
+        [nextActiveNote.folder]: true,
+      }));
+    }
     setResumeSlug(nextActiveSlug || null);
     if (nextActiveSlug) {
       window.localStorage.setItem(LAST_VISITED_NOTE_KEY, nextActiveSlug);
     }
     setQuery("");
     setIsCategoryHome(false);
-  };
-
-  const toggleCategory = (categoryId) => {
-    if (categoryId === "all") {
-      openCategorySelection(["all"]);
-      return;
-    }
-    const currentIds = selectedCategoryIds.includes("all")
-      ? []
-      : selectedCategoryIds;
-    const nextIds = currentIds.includes(categoryId)
-      ? currentIds.filter((id) => id !== categoryId)
-      : [...currentIds, categoryId];
-    setSelectedCategoryIds(nextIds);
   };
 
   const resumeLearning = () => {
@@ -225,6 +218,7 @@ export default function App() {
   const confirmCurrentAction = () => {
     if (confirmAction === "leave") {
       setIsCategoryHome(true);
+      setHomeView("domains");
       setDrawerOpen(false);
     } else if (confirmAction === "clear") {
       window.localStorage.removeItem(LAST_VISITED_NOTE_KEY);
@@ -234,6 +228,7 @@ export default function App() {
       setSelectedCategoryIds([]);
       setQuery("");
       setIsCategoryHome(true);
+      setHomeView("domains");
       setDrawerOpen(false);
     }
     setConfirmAction(null);
@@ -250,13 +245,19 @@ export default function App() {
     <div className={`app ${isMobile ? "is-mobile" : "is-desktop"}`}>
       {isCategoryHome ? (
         <LearningPathHome
-          categories={categories}
+          view={homeView}
+          categories={categories.filter(
+            (category) => category.id !== "electricals",
+          )}
           noteCount={allNotes.length}
           resumeNote={resumeNote}
-          selectedIds={selectedCategoryIds}
           canClearLearning={canClearLearning}
-          onToggleCategory={toggleCategory}
-          onStartLearning={() => openCategorySelection(selectedCategoryIds)}
+          onOpenSoftware={() => setHomeView("software")}
+          onOpenElectricals={() => openCategorySelection(["electricals"])}
+          onSelectSoftwareCategory={(categoryId) =>
+            openCategorySelection([categoryId])
+          }
+          onBackHome={() => setHomeView("domains")}
           onResume={resumeLearning}
           onRequestClear={() => setConfirmAction("clear")}
           theme={theme}

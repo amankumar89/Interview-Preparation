@@ -176,8 +176,8 @@ export default function Sidebar({
             title="Learning paths"
             onClick={onBrowseCategories}
           >
-            <span className="brand-mark">IP</span>
-            <span className="brand-name">Interview Prep</span>
+            <span className="brand-mark">PH</span>
+            <span className="brand-name">PrepHub</span>
           </button>
         )}
         <button

@@ -1,6 +1,6 @@
-# Interview Preparation
+# PrepHub
 
-A structured technical interview-preparation repository organized from beginner fundamentals to advanced engineering and AI topics.
+A structured learning library for software development and electrical engineering, organized from fundamentals to advanced topics.
 
 ## Learning Path
 

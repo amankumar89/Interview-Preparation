@@ -1,5 +1,5 @@
 /* =========================================================
-   Interview Prep — token system
+  PrepHub — token system
    A study manual, not a dashboard: paper, ink, one accent.
    ========================================================= */
 
@@ -251,9 +251,46 @@ body {
 }
 .category-card-resume {
   --category-accent: #347a70;
-  width: 100%;
   min-height: 82px;
-  margin-bottom: 10px;
+}
+.domain-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.domain-card {
+  min-height: 116px;
+}
+.domain-card:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  transform: none;
+}
+.domain-card:disabled:hover {
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.home-back-button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  margin: 0 0 16px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  font: 600 12px var(--font-sans);
+  cursor: pointer;
+}
+.home-back-button:hover,
+.home-back-button:focus-visible {
+  border-color: var(--burgundy);
+  color: var(--burgundy-dark);
+}
+.home-back-button:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 2px;
 }
 .category-card-resume .category-mark {
   font-size: 18px;
@@ -974,15 +1011,23 @@ body {
   grid-template-columns: minmax(0, 1fr);
   gap: 8px;
 }
+.app.is-mobile .domain-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
 .app.is-mobile .category-card-all {
   grid-column: auto;
 }
 .app.is-mobile .category-card {
+  grid-template-columns: 40px minmax(0, 1fr);
   min-height: 88px;
   padding: 13px;
 }
 .app.is-mobile .category-card-count {
+  grid-column: 2;
+  justify-self: start;
+  align-self: start;
   font-size: 9px;
+  white-space: normal;
 }
 .app.is-mobile .category-home-actions {
   align-items: stretch;
