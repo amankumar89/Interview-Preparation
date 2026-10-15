@@ -63,7 +63,7 @@ export default function App() {
   const tree = useMemo(() => buildTree(modules), []);
   const allNotes = useMemo(() => flattenNotes(tree), [tree]);
   const noteRouteSlug = pathname.startsWith("/learn/")
-    ? pathname.slice("/learn/".length)
+    ? pathname.slice("/learn/".length).replace(/\.md$/, "")
     : null;
   const routeNote = noteRouteSlug
     ? allNotes.find((note) => note.slug === noteRouteSlug)
