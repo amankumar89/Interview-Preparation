@@ -1,0 +1,26 @@
+# 67. APTITUDE
+
+## Subtopics
+
+1. [APTITUDE_Time_Speed_and_Distance](./01-aptitude-time-speed-and-distance.md)
+2. [Aptitude_Time_and_Work_Corrected](./02-aptitude-time-and-work-corrected.md)
+3. [Aptitude_Sitting_Arrangement_Corrected](./03-aptitude-sitting-arrangement-corrected.md)
+4. [APTITUDE_Simple_Interest](./04-aptitude-simple-interest.md)
+5. [Aptitude_Series_Corrected](./05-aptitude-series-corrected.md)
+6. [APTITUDE_Ratio_Proportion](./06-aptitude-ratio-proportion.md)
+7. [APTITUDE_Profit_and_Loss](./07-aptitude-profit-and-loss.md)
+8. [APTITUDE_Pipes_and_Cisterns](./08-aptitude-pipes-and-cisterns.md)
+9. [APTITUDE_Percentages](./09-aptitude-percentages.md)
+10. [APTITUDE_Odd_One_Out](./10-aptitude-odd-one-out.md)
+11. [APTITUDE_Mixture_Alligation](./11-aptitude-mixture-alligation.md)
+12. [APTITUDE_Mirror](./12-aptitude-mirror.md)
+13. [APTITUDE_Mensuration](./13-aptitude-mensuration.md)
+14. [APTITUDE_Direction_Sense](./14-aptitude-direction-sense.md)
+15. [APTITUDE_Cubes_and_Dice](./15-aptitude-cubes-and-dice.md)
+16. [APTITUDE_Compound_Interest](./16-aptitude-compound-interest.md)
+17. [APTITUDE_Coding_Decoding](./17-aptitude-coding-decoding.md)
+18. [APTITUDE_Clock_and_Calendar](./18-aptitude-clock-and-calendar.md)
+19. [APTITUDE_Blood_Relation](./19-aptitude-blood-relation.md)
+20. [APTITUDE_Average](./20-aptitude-average.md)
+21. [APTITUDE_Analogies](./21-aptitude-analogies.md)
+22. [APTITUDE_Ages](./22-aptitude-ages.md)
